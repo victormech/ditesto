@@ -23,6 +23,16 @@ class FileLocation implements ValueObjectInterface
      */
     public function __construct(Stringy $location)
     {
-        // TODO: Implement __construct method.
+        $this->location = $location;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getValue()
+    {
+        return clone $this->location;
+    }
+
+
 }

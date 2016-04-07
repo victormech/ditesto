@@ -20,7 +20,7 @@ class TextFile extends File
     /**
      * @return array
      */
-    public function lines()
+    public function getLines()
     {
         // TODO: Implement getLines method.
     }
@@ -54,6 +54,14 @@ class TextFile extends File
      * @return int
      */
     public function count()
+    {
+        // TODO: Implement getLastLine method.
+    }
+
+    /**
+     * @return array
+     */
+    protected function generateLines()
     {
         // TODO: Implement getLastLine method.
     }

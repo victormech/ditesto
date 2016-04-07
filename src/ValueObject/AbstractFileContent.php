@@ -31,7 +31,7 @@ abstract class AbstractFileContent implements ValueObjectInterface
      */
     public function getValue()
     {
-        return $this->content;
+        return clone $this->content;
     }
 	
     /**

@@ -24,7 +24,14 @@ class FileType implements ValueObjectInterface
      */
     public function __construct(Stringy $description)
     {
-        // TODO: Implement __construct method.
+        $this->description = $description;
     }
-	
+
+    /**
+     * @inheritDoc
+     */
+    public function getValue()
+    {
+        return clone $this->description;
+    }
 }

@@ -22,7 +22,7 @@ class TextFileValidator
      */
     public function __construct(FileLocation $location)
     {
-        // TODO: Implement __construct method.
+        $this->location = $location;
     }
 	
     /**
@@ -38,6 +38,6 @@ class TextFileValidator
      */
     public function getFileLocation()
     {
-        // TODO: Implement getFileLocation method.
+        return clone $this->location;
     }
 }
