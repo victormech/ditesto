@@ -1,0 +1,34 @@
+{
+  "name": "lazyeight/ditesto",
+  "type": "library",
+  "license": "MIT",
+  "description": "Object Oriented library to load and manipulate text files with PHP",
+  "keywords": [
+    "text",
+    "files",
+    "OO"
+  ],
+  "authors": [
+    {
+      "name": "Victor Ribeiro",
+      "email": "victormech@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "lazyeight/basic-types" : "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.3.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "LazyEight\\DiTesto\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\LazyEight\\DiTesto\\": "tests/"
+    }
+  }
+}
