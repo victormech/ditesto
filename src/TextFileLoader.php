@@ -24,7 +24,7 @@ class TextFileLoader
      */
     public function __construct(FileLocation $fileLocation)
     {
-        // TODO: Implement __construct method.
+        $this->fileLocation = $fileLocation;
     }
 	
     /**

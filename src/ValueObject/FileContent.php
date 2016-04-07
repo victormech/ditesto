@@ -8,15 +8,7 @@
 namespace LazyEight\DiTesto\ValueObject;
 
 
-use LazyEight\BasicTypes\Stringy;
-
 class FileContent extends AbstractFileContent
 {
-    /**
-     * @param Stringy $content
-     */
-    public function __construct(Stringy $content)
-    {
-        $this->content = $content;
-    }
+
 }

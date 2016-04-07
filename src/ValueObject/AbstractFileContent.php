@@ -17,7 +17,15 @@ abstract class AbstractFileContent implements ValueObjectInterface
      * @var Stringy
      */
     protected $content;
-    
+
+    /**
+     * @param Stringy $content
+     */
+    public function __construct(Stringy $content)
+    {
+        $this->content = $content;
+    }
+
     /**
      * @return Stringy
      */

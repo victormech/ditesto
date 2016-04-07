@@ -8,11 +8,8 @@
 namespace LazyEight\DiTesto\ValueObject;
 
 
-use LazyEight\BasicTypes\Interfaces\ValueObjectInterface;
-
-class File implements ValueObjectInterface
+class File
 {
-
     /*
      * @var FileLocation
      */
@@ -35,7 +32,9 @@ class File implements ValueObjectInterface
      */
     public function __construct(FileLocation $location, FileContent $content, FileType $fileType)
     {
-        // TODO: Implement __construct method.
+        $this->location = $location;
+        $this->content = $content;
+        $this->type = $fileType;
     }
 	
     /**
@@ -43,7 +42,7 @@ class File implements ValueObjectInterface
      */
     public function getLocation()
     {
-        // TODO: Implement getLocation method.
+        return clone $this->location;
     }
 	
     /**
@@ -51,7 +50,7 @@ class File implements ValueObjectInterface
      */
     public function getType()
     {
-        // TODO: Implement getType method.
+        return clone $this->type;
     }
 	
     /**
@@ -59,7 +58,6 @@ class File implements ValueObjectInterface
      */
     public function getContent()
     {
-        // TODO: Implement getContent method.
+        return clone $this->content;
     }
-	
 }

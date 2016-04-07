@@ -20,7 +20,7 @@ class TextFile extends File
     /**
      * @return array
      */
-    public function getLines()
+    public function lines()
     {
         // TODO: Implement getLines method.
     }
@@ -29,7 +29,7 @@ class TextFile extends File
      * @param int $index
      * @return Line
      */
-    public function getLineAt($index)
+    public function lineAt($index)
     {
         // TODO: Implement getLineAt method.
     }
@@ -37,7 +37,7 @@ class TextFile extends File
     /**
      * @return Line
      */
-    public function getFirstLine()
+    public function firstLine()
     {
         // TODO: Implement getFirstLine method.
     }
@@ -45,9 +45,16 @@ class TextFile extends File
     /**
      * @return Line
      */
-    public function getLastLine()
+    public function lastLine()
     {
         // TODO: Implement getLastLine method.
     }
-	
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        // TODO: Implement getLastLine method.
+    }
 }
