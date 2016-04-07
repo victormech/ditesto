@@ -2,8 +2,11 @@
 Object Oriented library to load and manipulate text files with PHP made for you who is so Object Oriented addicted like me :)
 PHP minimum version: 5.6
 
+## Usage
+Comeback later to see how it works! ;)
+
 ## UML Documentation
- [See the documentation!](https://repository.genmymodel.com/victormech/LazyEight-File-Loader "UML")
+ See the documentation on [GenMyModel](https://repository.genmymodel.com/victormech/LazyEight-File-Loader "UML") website
 
 ## License
   
