@@ -1,5 +1,5 @@
 # DiTesto
-Object Oriented library to load and manipulate text files with PHP made for you who is so Object Oriented addicted like me :)
+##### A simple Object Oriented library to load and manipulate text files with PHP. Made for who is so Object Oriented addicted like me :)
 PHP minimum version: 5.6
 
 ## Usage
