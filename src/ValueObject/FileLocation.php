@@ -33,6 +33,4 @@ class FileLocation implements ValueObjectInterface
     {
         return clone $this->location;
     }
-
-
 }

@@ -12,7 +12,6 @@ use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
 use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
 use LazyEight\DiTesto\Parser\TextContentParser;
-use LazyEight\DiTesto\ValueObject\File;
 use LazyEight\DiTesto\ValueObject\FileContent;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 use LazyEight\DiTesto\ValueObject\TextFile\TextFile;
