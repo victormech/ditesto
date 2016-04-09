@@ -42,7 +42,7 @@ class TextContent extends AbstractFileContent
      */
     public function lineAt($index)
     {
-        // TODO: Implement getLineAt method.
+        return clone $this->lines[$index];
     }
 
     /**
@@ -50,7 +50,7 @@ class TextContent extends AbstractFileContent
      */
     public function firstLine()
     {
-        // TODO: Implement getFirstLine method.
+        return clone $this->lines[0];
     }
 
     /**
@@ -58,7 +58,7 @@ class TextContent extends AbstractFileContent
      */
     public function lastLine()
     {
-        // TODO: Implement getLastLine method.
+        return clone $this->lines[count($this->lines) - 1];
     }
 
     /**
@@ -66,6 +66,6 @@ class TextContent extends AbstractFileContent
      */
     public function count()
     {
-        // TODO: Implement getLastLine method.
+        return count($this->lines);
     }
 }

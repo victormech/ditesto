@@ -9,6 +9,7 @@ namespace LazyEight\DiTesto\Parser;
 
 
 use LazyEight\DiTesto\ValueObject\AbstractFileContent;
+use LazyEight\DiTesto\ValueObject\TextFile\Line;
 use LazyEight\DiTesto\ValueObject\TextFile\TextContent;
 
 class TextContentParser
@@ -31,6 +32,20 @@ class TextContentParser
      */
     public function parse()
     {
-        return new TextContent($this->content->getValue(), array());
+        $lines = $this->convertContentToLines();
+        return new TextContent($this->content->getValue(), $lines);
+    }
+
+    /**
+     * @return array
+     */
+    protected function convertContentToLines()
+    {
+        $lines = array();
+        $arrLines = $this->content->getValue()->split('\n');
+        foreach ($arrLines as $value) {
+            $lines[] = new Line($value);
+        }
+        return $lines;
     }
 }

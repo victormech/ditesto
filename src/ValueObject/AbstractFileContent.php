@@ -39,7 +39,7 @@ abstract class AbstractFileContent implements ValueObjectInterface
      */
     public function __toString()
     {
-        return $this->content;
+        return $this->content->getValue();
     }
 	
 }
