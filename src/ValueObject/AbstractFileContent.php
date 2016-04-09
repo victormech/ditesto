@@ -14,7 +14,7 @@ use LazyEight\BasicTypes\Stringy;
 abstract class AbstractFileContent implements ValueObjectInterface
 {
     /*
-     * @var Stringy
+     * @var ValueObjectInterface
      */
     protected $content;
 
@@ -27,7 +27,7 @@ abstract class AbstractFileContent implements ValueObjectInterface
     }
 
     /**
-     * @return Stringy
+     * @return ValueObjectInterface Raw content
      */
     public function getValue()
     {
@@ -39,7 +39,7 @@ abstract class AbstractFileContent implements ValueObjectInterface
      */
     public function __toString()
     {
-        return $this->content;
+        return $this->content->getValue();
     }
 	
 }

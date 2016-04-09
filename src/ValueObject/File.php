@@ -19,42 +19,27 @@ class File
      * @var FileContent
      */
     private $content;
-    
-    /*
-     * @var FileType
-     */
-    private $type;
-    
+
     /**
      * @param FileLocation $location
      * @param FileContent $content
-     * @param FileType $fileType
      */
-    public function __construct(FileLocation $location, FileContent $content, FileType $fileType)
+    public function __construct(FileLocation $location, FileContent $content)
     {
         $this->location = $location;
         $this->content = $content;
-        $this->type = $fileType;
     }
 	
     /**
-     * @return FileLocation
+     * @return FileLocation The location of the file on disk
      */
     public function getLocation()
     {
         return clone $this->location;
     }
-	
+
     /**
-     * @return FileType
-     */
-    public function getType()
-    {
-        return clone $this->type;
-    }
-	
-    /**
-     * @return FileContent
+     * @return FileContent Raw content of the file
      */
     public function getContent()
     {
