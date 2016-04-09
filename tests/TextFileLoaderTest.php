@@ -12,6 +12,7 @@ use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\TextFileLoader;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
+use LazyEight\DiTesto\ValueObject\TextFile\TextFile;
 
 class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,7 +45,7 @@ class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanBeLoaded(TextFileLoader $loader)
     {
-        $loader->loadFile();
+        $this->assertInstanceOf(TextFile::class, $loader->loadFile());
     }
 
     /**
