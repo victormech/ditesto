@@ -8,6 +8,8 @@
 namespace LazyEight\DiTesto;
 
 
+use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
+use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 
 class TextFileValidator
@@ -16,6 +18,11 @@ class TextFileValidator
      * @var FileLocation
      */
     private $location;
+
+    /**
+     * @var string
+     */
+    private $allowedMimeType = 'text/plain';
     
     /**
      * @param FileLocation $location
@@ -30,7 +37,29 @@ class TextFileValidator
      */
     public function validate()
     {
-        // TODO: Implement validate method.
+        $this->validateFileLocation();
+        $this->validateFileContent();
+    }
+
+    /**
+     * @throws InvalidFileLocationException If file not exists
+     */
+    protected function validateFileLocation()
+    {
+        if (!file_exists($this->location->getValue())) {
+            throw new InvalidFileLocationException('File not exists!', 101);
+        }
+    }
+
+    protected function validateFileContent()
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $fileInfo = finfo_file($finfo, $this->location->getValue());
+        if ($fileInfo !== $this->allowedMimeType) {
+            $errorMsg = 'Invalid file type. Found '. $fileInfo . ' when ';
+            $errorMsg .= $this->allowedMimeType . ' was expected';
+            throw new InvalidFileTypeException($errorMsg);
+        }
     }
 	
     /**

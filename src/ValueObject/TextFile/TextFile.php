@@ -9,60 +9,27 @@ namespace LazyEight\DiTesto\ValueObject\TextFile;
 
 
 use LazyEight\DiTesto\ValueObject\File;
+use LazyEight\DiTesto\ValueObject\FileContent;
+use LazyEight\DiTesto\ValueObject\FileLocation;
 
 class TextFile extends File
 {
-    /*
-     * @var array
-     */
-    private $lines;
-    
     /**
-     * @return array
+     * @var TextContent
      */
-    public function getLines()
-    {
-        // TODO: Implement getLines method.
-    }
-	
-    /**
-     * @param int $index
-     * @return Line
-     */
-    public function lineAt($index)
-    {
-        // TODO: Implement getLineAt method.
-    }
-	
-    /**
-     * @return Line
-     */
-    public function firstLine()
-    {
-        // TODO: Implement getFirstLine method.
-    }
-	
-    /**
-     * @return Line
-     */
-    public function lastLine()
-    {
-        // TODO: Implement getLastLine method.
-    }
+    private $textContent;
 
     /**
-     * @return int
+     * @inheritDoc
      */
-    public function count()
+    public function __construct(FileLocation $location, FileContent $content, TextContent $textContent)
     {
-        // TODO: Implement getLastLine method.
+        parent::__construct($location, $content);
+        $this->textContent = $textContent;
     }
 
-    /**
-     * @return array
-     */
-    protected function generateLines()
+    public function getTextContent()
     {
-        // TODO: Implement getLastLine method.
+        return clone $this->textContent;
     }
 }
