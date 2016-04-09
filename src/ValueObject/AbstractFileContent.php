@@ -27,7 +27,7 @@ abstract class AbstractFileContent implements ValueObjectInterface
     }
 
     /**
-     * @return ValueObjectInterface Raw content
+     * @return Stringy Raw content
      */
     public function getValue()
     {
