@@ -42,6 +42,9 @@ class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \LazyEight\DiTesto\TextFileLoader::loadFile
+     * @covers \LazyEight\DiTesto\TextFileLoader::validateFile
+     * @covers \LazyEight\DiTesto\TextFileLoader::loadFileFromOS
+     * @covers \LazyEight\DiTesto\TextFileLoader::createFileObject
      * @uses \LazyEight\DiTesto\TextFileLoader
      * @depends testCanBeCreated
      * @uses \LazyEight\DiTesto\TextFileLoader
@@ -54,6 +57,9 @@ class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \LazyEight\DiTesto\TextFileLoader::loadFile
+     * @covers \LazyEight\DiTesto\TextFileLoader::validateFile
+     * @covers \LazyEight\DiTesto\TextFileLoader::loadFileFromOS
+     * @covers \LazyEight\DiTesto\TextFileLoader::createFileObject
      * @expectedException \LazyEight\DiTesto\Exceptions\InvalidFileTypeException
      * @uses \LazyEight\DiTesto\TextFileLoader
      */
@@ -66,6 +72,7 @@ class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \LazyEight\DiTesto\TextFileLoader::loadFile
+     * @covers \LazyEight\DiTesto\TextFileLoader::validateFile
      * @expectedException \LazyEight\DiTesto\Exceptions\InvalidFileLocationException
      * @uses \LazyEight\DiTesto\TextFileLoader
      */
