@@ -49,6 +49,8 @@ class TextFileLoader
     /**
      * Load the file to memory
      *
+     * @throws InvalidFileLocationException
+     * @throws InvalidFileTypeException
      * @return TextFile The text file itself
      */
     public function loadFile()

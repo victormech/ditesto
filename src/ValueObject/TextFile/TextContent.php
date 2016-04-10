@@ -9,6 +9,7 @@
 namespace LazyEight\DiTesto\ValueObject\TextFile;
 
 
+use LazyEight\BasicTypes\Exceptions\IndexOutOfBoundsException;
 use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\ValueObject\AbstractFileContent;
 
@@ -38,10 +39,14 @@ class TextContent extends AbstractFileContent
 
     /**
      * @param int $index
+     * @throws IndexOutOfBoundsException
      * @return Line
      */
     public function lineAt($index)
     {
+        if (0 > $index || ($this->count() - 1) < $index) {
+            throw new IndexOutOfBoundsException('The index is negative or not less than the length of the array.');
+        }
         return clone $this->lines[$index];
     }
 

@@ -32,8 +32,7 @@ class TextContentParser
      */
     public function parse()
     {
-        $lines = $this->convertContentToLines();
-        return new TextContent($this->content->getValue(), $lines);
+        return new TextContent($this->content->getValue(), $this->convertContentToLines());
     }
 
     /**

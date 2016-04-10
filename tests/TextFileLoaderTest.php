@@ -9,6 +9,7 @@ namespace Test\DiTesto;
 
 
 use LazyEight\BasicTypes\Stringy;
+use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
 use LazyEight\DiTesto\TextFileLoader;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
@@ -21,6 +22,9 @@ class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
      */
     protected $file = './tests/files/urls.txt';
 
+    /**
+     * @var string
+     */
     protected $imageFile = './tests/files/images.jpg';
 
     /**
@@ -57,6 +61,18 @@ class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
     {
         $textLoader = new TextFileLoader(new FileLocation(new Stringy($this->imageFile)));
         $this->expectException(InvalidFileTypeException::class);
+        $textLoader->loadFile();
+    }
+
+    /**
+     * @covers \LazyEight\DiTesto\TextFileLoader::loadFile
+     * @expectedException \LazyEight\DiTesto\Exceptions\InvalidFileLocationException
+     * @uses \LazyEight\DiTesto\TextFileLoader
+     */
+    public function testCantBeLoadedInvaidLocation()
+    {
+        $textLoader = new TextFileLoader(new FileLocation(new Stringy('abc_'.$this->imageFile)));
+        $this->expectException(InvalidFileLocationException::class);
         $textLoader->loadFile();
     }
 }
