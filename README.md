@@ -6,8 +6,25 @@
 PHP minimum version: 5.6
 
 ## Usage
-Comeback later to see how it works! ;)
-
+```php
+$file = new Stringy('/home/user/text-file.txt');
+$fileLoader = new TextFileLoader(new FileLocation($file));
+$textFile = $fileLoader->loadFile();
+echo $textFile;
+```
+You can iterate line per line if you want:
+```php
+foreach ($textFile->getTextContent()->getLines() as $line) {
+   echo $line;
+}
+```
+More useful methods :
+```php
+echo $textFile->lineAt(3);
+echo $text->count();
+echo $textFile->firstLine();
+echo $textFile->lastLine();
+```
 ## UML Documentation
  See the documentation on [GenMyModel](https://repository.genmymodel.com/victormech/LazyEight-File-Loader "UML") website
 
