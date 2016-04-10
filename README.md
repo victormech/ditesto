@@ -22,7 +22,7 @@ foreach ($lines as $line) {
 More useful methods :
 ```php
 echo $textFile->lineAt(3);
-echo $text->count();
+echo $textFile->count();
 echo $textFile->firstLine();
 echo $textFile->lastLine();
 ```
