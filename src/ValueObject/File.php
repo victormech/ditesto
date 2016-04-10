@@ -41,8 +41,16 @@ class File
     /**
      * @return FileContent Raw content of the file
      */
-    public function getContent()
+    public function getRawContent()
     {
         return clone $this->content;
+    }
+
+    /**
+     * @var string
+     */
+    public function __toString()
+    {
+        return $this->getRawContent()->getValue()->getValue();
     }
 }

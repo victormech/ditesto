@@ -53,7 +53,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \LazyEight\DiTesto\ValueObject\File::getContent
+     * @covers \LazyEight\DiTesto\ValueObject\File::getRawContent
      * @covers \LazyEight\DiTesto\ValueObject\FileContent::getValue
      * @uses \LazyEight\DiTesto\ValueObject\File
      * @depends testCanBeCreated
@@ -63,7 +63,18 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testContentCanBeRetrieved(File $file)
     {
         $content = new FileContent(new Stringy(file_get_contents($this->file)));
-        $this->assertEquals($content, $file->getContent());
-        $this->assertNotEquals($content->getValue(), $file->getContent());
+        $this->assertEquals($content, $file->getRawContent());
+        $this->assertNotEquals($content->getValue(), $file->getRawContent());
+    }
+
+    /**
+     * @covers \LazyEight\DiTesto\ValueObject\File::__toString
+     * @depends testCanBeCreated
+     * @uses \LazyEight\DiTesto\ValueObject\File
+     * @param \LazyEight\DiTesto\ValueObject\File
+     */
+    public function testToString(File $file)
+    {
+        $this->assertEquals($file->__toString(), file_get_contents($this->file));
     }
 }
