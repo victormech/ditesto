@@ -23,6 +23,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \LazyEight\DiTesto\ValueObject\File::__construct
+     * @covers \LazyEight\DiTesto\ValueObject\FileLocation::__construct
+     * @covers \LazyEight\DiTesto\ValueObject\FileContent::__construct
      * @uses \LazyEight\DiTesto\ValueObject\File
      * @return \LazyEight\DiTesto\ValueObject\File
      */
@@ -36,7 +38,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \LazyEight\DiTesto\ValueObject\FileContent::getLocation
+     * @covers \LazyEight\DiTesto\ValueObject\File::getLocation
+     * @covers \LazyEight\DiTesto\ValueObject\FileLocation::getValue
      * @uses \LazyEight\DiTesto\ValueObject\File
      * @depends testCanBeCreated
      * @uses \LazyEight\DiTesto\ValueObject\File
@@ -50,7 +53,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers \LazyEight\DiTesto\ValueObject\FileContent::getLocation
+     * @covers \LazyEight\DiTesto\ValueObject\File::getContent
+     * @covers \LazyEight\DiTesto\ValueObject\FileContent::getValue
      * @uses \LazyEight\DiTesto\ValueObject\File
      * @depends testCanBeCreated
      * @uses \LazyEight\DiTesto\ValueObject\File

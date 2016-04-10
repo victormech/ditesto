@@ -36,7 +36,7 @@ class TextContentParserTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \LazyEight\DiTesto\Parser\TextContentParser::parse
-     * @covers \LazyEight\DiTesto\Parser\TextContentParser::getValue
+     * @covers \LazyEight\DiTesto\ValueObject\TextFile\TextContent::getValue
      * @covers \LazyEight\DiTesto\Parser\TextContentParser::getLines
      * @uses \LazyEight\DiTesto\Parser\TextContentParser
      * @depends testCanBeCreated
