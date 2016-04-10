@@ -38,8 +38,8 @@ class FileLocationTest extends \PHPUnit_Framework_TestCase
      * @uses \LazyEight\DiTesto\ValueObject\FileLocation
      * @param \LazyEight\DiTesto\ValueObject\FileLocation
      */
-    public function testValueCanBeRetrieved(FileLocation $loader)
+    public function testValueCanBeRetrieved(FileLocation $location)
     {
-        $this->assertEquals($loader->getValue()->getValue(), $this->file);
+        $this->assertEquals($location->getValue()->getValue(), $this->file);
     }
 }
