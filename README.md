@@ -14,7 +14,8 @@ echo $textFile;
 ```
 You can iterate line per line if you want:
 ```php
-foreach ($textFile->getTextContent()->getLines() as $line) {
+$lines = $textFile->getTextContent()->getLines();
+foreach ($lines as $line) {
    echo $line;
 }
 ```
