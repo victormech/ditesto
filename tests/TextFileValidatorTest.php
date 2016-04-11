@@ -12,7 +12,7 @@ namespace Test\DiTesto;
 use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
 use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
-use LazyEight\DiTesto\TextFileValidator;
+use LazyEight\DiTesto\Validator\TextFileLoaderValidator;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 
 class TextFileValidatorTest extends \PHPUnit_Framework_TestCase
@@ -28,51 +28,51 @@ class TextFileValidatorTest extends \PHPUnit_Framework_TestCase
     protected $imageFile = './tests/files/images.jpg';
 
     /**
-     * @covers \LazyEight\DiTesto\TextFileValidator::__construct
-     * @uses \LazyEight\DiTesto\TextFileValidator
-     * @return \LazyEight\DiTesto\TextFileValidator
+     * @covers \LazyEight\DiTesto\Validator\TextFileLoaderValidator::__construct
+     * @uses \LazyEight\DiTesto\Validator\TextFileLoaderValidator
+     * @return \LazyEight\DiTesto\Validator\TextFileLoaderValidator
      */
     public function testCanBeCreated()
     {
         $filename = new Stringy($this->file);
-        $instance = new TextFileValidator(new FileLocation($filename));
-        $this->assertInstanceOf(TextFileValidator::class, $instance);
+        $instance = new TextFileLoaderValidator(new FileLocation($filename));
+        $this->assertInstanceOf(TextFileLoaderValidator::class, $instance);
         return $instance;
     }
 
     /**
-     * @covers \LazyEight\DiTesto\TextFileValidator::validate
-     * @uses \LazyEight\DiTesto\TextFileValidator
+     * @covers \LazyEight\DiTesto\Validator\TextFileLoaderValidator::validate
+     * @uses \LazyEight\DiTesto\Validator\TextFileLoaderValidator
      * @depends testCanBeCreated
-     * @uses \LazyEight\DiTesto\TextFileValidator
-     * @param \LazyEight\DiTesto\TextFileValidator
+     * @uses \LazyEight\DiTesto\Validator\TextFileLoaderValidator
+     * @param \LazyEight\DiTesto\Validator\TextFileLoaderValidator
      */
-    public function testValidationSuccess(TextFileValidator $validator)
+    public function testValidationSuccess(TextFileLoaderValidator $validator)
     {
         $this->assertTrue($validator->validate());
     }
 
     /**
-     * @covers \LazyEight\DiTesto\TextFileValidator::validate
+     * @covers \LazyEight\DiTesto\Validator\TextFileLoaderValidator::validate
      * @expectedException \LazyEight\DiTesto\Exceptions\InvalidFileLocationException
-     * @uses \LazyEight\DiTesto\TextFileValidator
+     * @uses \LazyEight\DiTesto\Validator\TextFileLoaderValidator
      */
     public function testLocationValidation()
     {
         $this->expectException(InvalidFileLocationException::class);
         $fileLocationError = new Stringy('abc/' . $this->file);
-        (new TextFileValidator(new FileLocation($fileLocationError)))->validate();
+        (new TextFileLoaderValidator(new FileLocation($fileLocationError)))->validate();
     }
 
     /**
-     * @covers \LazyEight\DiTesto\TextFileValidator::validate
+     * @covers \LazyEight\DiTesto\Validator\TextFileLoaderValidator::validate
      * @expectedException \LazyEight\DiTesto\Exceptions\InvalidFileTypeException
-     * @uses \LazyEight\DiTesto\TextFileValidator
+     * @uses \LazyEight\DiTesto\Validator\TextFileLoaderValidator
      */
     public function testFileTypeValidation()
     {
         $this->expectException(InvalidFileTypeException::class);
         $fileLocationError = new Stringy($this->imageFile);
-        (new TextFileValidator(new FileLocation($fileLocationError)))->validate();
+        (new TextFileLoaderValidator(new FileLocation($fileLocationError)))->validate();
     }
 }

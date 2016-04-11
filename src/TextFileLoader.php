@@ -34,7 +34,7 @@ class TextFileLoader
     private $file;
 
     /**
-     * @var TextFileValidator
+     * @var TextFileLoaderValidator
      */
     private $validator;
     
@@ -89,12 +89,12 @@ class TextFileLoader
     }
 
     /**
-     * @return TextFileValidator
+     * @return TextFileLoaderValidator
      */
     protected function getValidator()
     {
         if (!$this->validator) {
-            $this->validator = new TextFileValidator($this->fileLocation);
+            $this->validator = new TextFileLoaderValidator($this->fileLocation);
         }
         return $this->validator;
     }
