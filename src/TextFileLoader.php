@@ -57,7 +57,7 @@ class TextFileLoader
     public function loadFile()
     {
         $this->validateFile();
-        $this->rawContent = $this->loadFileFromOS();
+        $this->rawContent = $this->loadFileFromDisk();
         $this->file = $this->createFileObject();
         return clone $this->file;
     }
@@ -65,7 +65,7 @@ class TextFileLoader
     /**
      * @return FileContent
      */
-    protected function loadFileFromOS()
+    protected function loadFileFromDisk()
     {
         return new FileContent(new Stringy(file_get_contents($this->fileLocation->getValue())));
     }
@@ -86,17 +86,6 @@ class TextFileLoader
      */
     protected function validateFile()
     {
-        $this->getValidator()->validate();
-    }
-
-    /**
-     * @return TextFileLoaderValidator
-     */
-    protected function getValidator()
-    {
-        if (!$this->validator) {
-            $this->validator = new TextFileLoaderValidator($this->fileLocation);
-        }
-        return $this->validator;
+        return (new TextFileLoaderValidator($this->fileLocation))->validate();
     }
 }

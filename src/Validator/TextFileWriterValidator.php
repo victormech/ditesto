@@ -31,17 +31,40 @@ class TextFileWriterValidator extends AbstractTextFileValidator
 
     /**
      * @throws InvalidFileLocationException
-     * @throws InvalidFileTypeException
      * @return bool
      */
     public function validate()
     {
-        $this->validateFilePath();
+        return $this->validateFilePath();
+    }
+
+    /**
+     * @throws InvalidFileLocationException
+     * @return bool
+     */
+    protected function validateFile()
+    {
+        if ($this->file->exists()) {
+            return $this->validateIsWriteable();
+        }
+        return $this->validateFilePath();
+    }
+
+    /**
+     * @throws InvalidFileLocationException
+     * @return bool
+     */
+    protected function validateIsWriteable()
+    {
+        if (!$this->file->isWritable()) {
+            throw new InvalidFileLocationException('The file is not writable.', 104);
+        }
         return true;
     }
 
     /**
      * @throws InvalidFileLocationException
+     * @return bool
      */
     protected function validateFilePath()
     {
@@ -49,6 +72,7 @@ class TextFileWriterValidator extends AbstractTextFileValidator
         if (!is_writable($fileDir->getValue())) {
             throw new InvalidFileLocationException("The directory {$fileDir->getValue()} is not writable.", 103);
         }
+        return true;
     }
 
     /**

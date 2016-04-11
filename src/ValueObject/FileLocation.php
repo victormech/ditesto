@@ -41,4 +41,12 @@ class FileLocation implements ValueObjectInterface
     {
         return $this->location->substring(0, $this->location->lastIndexOf("/"));
     }
+
+    /**
+     * @return bool
+     */
+    public function isWritable()
+    {
+        return is_writable($this->location->getValue());
+    }
 }
