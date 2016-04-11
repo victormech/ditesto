@@ -9,6 +9,8 @@
 namespace LazyEight\DiTesto\Validator;
 
 
+use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
+use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 
 abstract class AbstractTextFileValidator
@@ -41,7 +43,7 @@ abstract class AbstractTextFileValidator
         $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
         $rawInfo = finfo_file($fileInfo, $this->getFileLocation()->getValue());
         if ($rawInfo !== $this->allowedMimeType) {
-            throw new InvalidFileTypeException($this->getFileContentErrorMessage($rawInfo));
+            throw new InvalidFileTypeException($this->getFileContentErrorMessage($rawInfo), 102);
         }
     }
 

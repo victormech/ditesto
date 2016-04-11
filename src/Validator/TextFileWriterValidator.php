@@ -47,7 +47,7 @@ class TextFileWriterValidator extends AbstractTextFileValidator
     {
         $fileDir = $this->file->getLocation()->getFileDirectory();
         if (!is_writable($fileDir->getValue())) {
-            throw new InvalidFileLocationException("The directory {$fileDir->getValue()} is not writable.");
+            throw new InvalidFileLocationException("The directory {$fileDir->getValue()} is not writable.", 103);
         }
     }
 
