@@ -13,7 +13,7 @@ use LazyEight\BasicTypes\Stringy;
 
 class FileLocation implements ValueObjectInterface
 {
-    /*
+    /**
      * @var Stringy
      */
     private $location;
@@ -32,5 +32,13 @@ class FileLocation implements ValueObjectInterface
     public function getValue()
     {
         return clone $this->location;
+    }
+
+    /**
+     * @return Stringy
+     */
+    public function getFileDirectory()
+    {
+        return $this->location->substring(0, $this->location->lastIndexOf("/"));
     }
 }
