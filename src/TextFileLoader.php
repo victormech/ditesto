@@ -35,11 +35,6 @@ class TextFileLoader
     private $file;
 
     /**
-     * @var TextFileLoaderValidator
-     */
-    private $validator;
-    
-    /**
      * @param FileLocation $fileLocation
      */
     public function __construct(FileLocation $fileLocation)
