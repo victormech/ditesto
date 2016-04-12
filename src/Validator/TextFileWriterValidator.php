@@ -10,7 +10,6 @@ namespace LazyEight\DiTesto\Validator;
 
 
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
-use LazyEight\DiTesto\ValueObject\FileLocation;
 use LazyEight\DiTesto\ValueObject\TextFile\TextFile;
 
 class TextFileWriterValidator extends AbstractTextFileValidator
