@@ -42,6 +42,8 @@ class TextFileValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \LazyEight\DiTesto\Validator\TextFileLoaderValidator::validate
+     * @covers \LazyEight\DiTesto\Validator\AbstractTextFileValidator::validate
+     * @covers \LazyEight\DiTesto\Validator\AbstractTextFileValidator::getFileLocation
      * @uses \LazyEight\DiTesto\Validator\TextFileLoaderValidator
      * @depends testCanBeCreated
      * @uses \LazyEight\DiTesto\Validator\TextFileLoaderValidator
@@ -54,6 +56,9 @@ class TextFileValidatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \LazyEight\DiTesto\Validator\TextFileLoaderValidator::validate
+     * @covers \LazyEight\DiTesto\Validator\TextFileLoaderValidator::getFileLocation
+     * @covers \LazyEight\DiTesto\Validator\AbstractTextFileValidator::validate
+     * @covers \LazyEight\DiTesto\Validator\AbstractTextFileValidator::getFileLocation
      * @expectedException \LazyEight\DiTesto\Exceptions\InvalidFileLocationException
      * @uses \LazyEight\DiTesto\Validator\TextFileLoaderValidator
      */
