@@ -10,12 +10,12 @@ namespace LazyEight\DiTesto\ValueObject;
 
 class File
 {
-    /*
+    /**
      * @var FileLocation
      */
     private $location;
     
-    /*
+    /**
      * @var FileContent
      */
     private $content;
@@ -47,7 +47,23 @@ class File
     }
 
     /**
-     * @var string
+     * @return bool
+     */
+    public function exists()
+    {
+        return file_exists($this->location->getValue());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWritable()
+    {
+        return $this->location->isWritable();
+    }
+
+    /**
+     * @return string
      */
     public function __toString()
     {

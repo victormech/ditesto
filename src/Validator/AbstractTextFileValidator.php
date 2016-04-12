@@ -1,55 +1,36 @@
 <?php
 /**
- * Created with PHP 5.6 generator
- * User: 
- * PHP 5.6 generator created by Victor MECH - April 2016
-*/
+ * Created by PhpStorm.
+ * User: victor
+ * Date: 10/04/16
+ * Time: 23:42
+ */
 
-namespace LazyEight\DiTesto;
+namespace LazyEight\DiTesto\Validator;
 
 
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
 use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 
-class TextFileValidator
+abstract class AbstractTextFileValidator
 {
-    /**
-     * @var FileLocation
-     */
-    protected $location;
-
     /**
      * @var string
      */
     private $allowedMimeType = 'text/plain';
 
     /**
-     * @param FileLocation $location
-     */
-    public function __construct(FileLocation $location)
-    {
-        $this->location = $location;
-    }
-	
-    /**
-     * @throws InvalidFileLocationException
-     * @throws InvalidFileTypeException
      * @return bool
      */
-    public function validate()
-    {
-        $this->validateFileLocation();
-        $this->validateFileContent();
-        return true;
-    }
+    abstract public function validate();
 
     /**
      * @throws InvalidFileLocationException If file not exists
      */
     protected function validateFileLocation()
     {
-        if (!file_exists($this->location->getValue())) {
+        if (!file_exists($this->getFileLocation()->getValue())) {
             throw new InvalidFileLocationException('File not exists!', 101);
         }
     }
@@ -60,19 +41,16 @@ class TextFileValidator
     protected function validateFileContent()
     {
         $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
-        $rawInfo = finfo_file($fileInfo, $this->location->getValue());
+        $rawInfo = finfo_file($fileInfo, $this->getFileLocation()->getValue());
         if ($rawInfo !== $this->allowedMimeType) {
-            throw new InvalidFileTypeException($this->getFileContentErrorMessage($rawInfo));
+            throw new InvalidFileTypeException($this->getFileContentErrorMessage($rawInfo), 102);
         }
     }
-	
+
     /**
      * @return FileLocation
      */
-    public function getFileLocation()
-    {
-        return clone $this->location;
-    }
+    abstract protected function getFileLocation();
 
     /**
      * @param $rawInfo object created by finfo_file function

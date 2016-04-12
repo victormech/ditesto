@@ -28,6 +28,9 @@ class TextFile extends File
         $this->textContent = $textContent;
     }
 
+    /**
+     * @return TextContent
+     */
     public function getTextContent()
     {
         return clone $this->textContent;
