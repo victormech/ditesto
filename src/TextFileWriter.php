@@ -9,7 +9,6 @@ namespace LazyEight\DiTesto;
 
 
 use LazyEight\DiTesto\Validator\TextFileWriterValidator;
-use LazyEight\DiTesto\ValueObject\File;
 use LazyEight\DiTesto\ValueObject\TextFile\TextFile;
 
 class TextFileWriter
