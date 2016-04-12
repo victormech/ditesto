@@ -10,18 +10,19 @@ namespace LazyEight\DiTesto;
 
 use LazyEight\DiTesto\Validator\TextFileWriterValidator;
 use LazyEight\DiTesto\ValueObject\File;
+use LazyEight\DiTesto\ValueObject\TextFile\TextFile;
 
 class TextFileWriter
 {
     /**
-     * @var File
+     * @var TextFile
      */
     protected $file;
 
     /**
-     * @param File $file
+     * @param TextFile $file
      */
-    public function __construct(File $file)
+    public function __construct(TextFile $file)
     {
         $this->file = clone $file;
     }
@@ -35,6 +36,9 @@ class TextFileWriter
         $this->writeFileToDisk();
     }
 
+    /**
+     * Writes the file to disk
+     */
     protected function writeFileToDisk()
     {
         file_put_contents($this->file->getLocation()->getValue());
