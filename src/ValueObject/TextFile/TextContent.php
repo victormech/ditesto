@@ -1,18 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: victor
- * Date: 09/04/16
- * Time: 05:01
- */
 
 namespace LazyEight\DiTesto\ValueObject\TextFile;
-
 
 use LazyEight\BasicTypes\Exceptions\IndexOutOfBoundsException;
 use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\ValueObject\AbstractFileContent;
 
+/**
+ * Class TextContent
+ * @package LazyEight\DiTesto\ValueObject\TextFile
+ */
 class TextContent extends AbstractFileContent
 {
     /*
@@ -32,7 +29,7 @@ class TextContent extends AbstractFileContent
     /**
      * @return array
      */
-    public function getLines()
+    public function getLines() : array
     {
         return $this->lines;
     }
@@ -42,18 +39,19 @@ class TextContent extends AbstractFileContent
      * @throws IndexOutOfBoundsException
      * @return Line
      */
-    public function lineAt($index)
+    public function lineAt($index) : Line
     {
         if (0 > $index || ($this->count() - 1) < $index) {
             throw new IndexOutOfBoundsException('The index is negative or not less than the length of the array.');
         }
+
         return clone $this->lines[$index];
     }
 
     /**
      * @return Line
      */
-    public function firstLine()
+    public function firstLine() : Line
     {
         return clone $this->lines[0];
     }
@@ -61,7 +59,7 @@ class TextContent extends AbstractFileContent
     /**
      * @return Line
      */
-    public function lastLine()
+    public function lastLine() : Line
     {
         return clone $this->lines[count($this->lines) - 1];
     }
@@ -69,7 +67,7 @@ class TextContent extends AbstractFileContent
     /**
      * @return int
      */
-    public function count()
+    public function count() : int
     {
         return count($this->lines);
     }

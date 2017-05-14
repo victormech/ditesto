@@ -1,13 +1,11 @@
 <?php
-/**
- * Created with PHP 5.6 generator
- * User: 
- * PHP 5.6 generator created by Victor MECH - April 2016
-*/
 
 namespace LazyEight\DiTesto\ValueObject;
 
-
+/**
+ * Class File
+ * @package LazyEight\DiTesto\ValueObject
+ */
 class File
 {
     /**
@@ -29,11 +27,11 @@ class File
         $this->location = $location;
         $this->content = $content;
     }
-	
+
     /**
      * @return FileLocation The location of the file on disk
      */
-    public function getLocation()
+    public function getLocation() : FileLocation
     {
         return clone $this->location;
     }
@@ -41,7 +39,7 @@ class File
     /**
      * @return FileContent Raw content of the file
      */
-    public function getRawContent()
+    public function getRawContent() : FileContent
     {
         return clone $this->content;
     }
@@ -49,7 +47,7 @@ class File
     /**
      * @return bool
      */
-    public function exists()
+    public function exists() : bool
     {
         return file_exists($this->location->getValue());
     }
@@ -57,7 +55,7 @@ class File
     /**
      * @return bool
      */
-    public function isWritable()
+    public function isWritable() : bool
     {
         return $this->location->isWritable();
     }
@@ -65,7 +63,7 @@ class File
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->getRawContent()->getValue()->getValue();
     }

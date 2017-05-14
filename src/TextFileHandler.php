@@ -1,14 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: victor
- * Date: 10/04/16
- * Time: 23:46
- */
 
 namespace LazyEight\DiTesto;
 
-
+use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
+use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 use LazyEight\DiTesto\ValueObject\TextFile\TextFile;
 
@@ -22,10 +17,9 @@ class TextFileHandler
      * @param FileLocation $location
      * @return TextFile
      */
-    public function loadFileFromPath(FileLocation $location)
+    public function loadFileFromPath(FileLocation $location) : TextFile
     {
-        $fileLoader = new TextFileLoader($location);
-        return $fileLoader->loadFile();
+        return (new TextFileLoader($location))->loadFile();
     }
 
     /**
@@ -33,7 +27,6 @@ class TextFileHandler
      */
     public function writeFile(TextFile $file)
     {
-        $fileWriter = new TextFileWriter($file);
-        $fileWriter->writeFile();
+        (new TextFileWriter($file))->writeFile();
     }
 }

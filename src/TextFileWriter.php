@@ -1,16 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Ribeiro <victormech@gmail.com>
- * Date: 10/04/16
- */
 
 namespace LazyEight\DiTesto;
-
 
 use LazyEight\DiTesto\Validator\TextFileWriterValidator;
 use LazyEight\DiTesto\ValueObject\TextFile\TextFile;
 
+/**
+ * Class TextFileWriter
+ * @package LazyEight\DiTesto
+ */
 class TextFileWriter
 {
     /**
@@ -40,13 +38,13 @@ class TextFileWriter
      */
     protected function writeFileToDisk()
     {
-        file_put_contents($this->file->getLocation()->getValue());
+        file_put_contents($this->file->getLocation()->getValue(), $this->file->getRawContent()->getValue());
     }
 
     /**
      * @return bool
      */
-    protected function validateFile()
+    protected function validateFile() : bool
     {
         return (new TextFileWriterValidator($this->file))->validate();
     }

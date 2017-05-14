@@ -1,17 +1,15 @@
 <?php
-/**
- * Created with PHP 5.6 generator
- * User: 
- * PHP 5.6 generator created by Victor MECH - April 2016
-*/
 
 namespace LazyEight\DiTesto\Validator;
-
 
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
 use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 
+/**
+ * Class TextFileLoaderValidator
+ * @package LazyEight\DiTesto\Validator
+ */
 class TextFileLoaderValidator extends AbstractTextFileValidator
 {
     /**
@@ -26,13 +24,13 @@ class TextFileLoaderValidator extends AbstractTextFileValidator
     {
         $this->location = clone $location;
     }
-	
+
     /**
      * @throws InvalidFileLocationException
      * @throws InvalidFileTypeException
      * @return bool
      */
-    public function validate()
+    public function validate() : bool
     {
         $this->validateFileLocation();
         $this->validateFileContent();
@@ -42,7 +40,7 @@ class TextFileLoaderValidator extends AbstractTextFileValidator
     /**
      * @return FileLocation
      */
-    public function getFileLocation()
+    public function getFileLocation() : FileLocation
     {
         return clone $this->location;
     }

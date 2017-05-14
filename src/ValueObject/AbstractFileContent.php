@@ -1,16 +1,14 @@
 <?php
-/**
- * Created with PHP 5.6 generator
- * User: 
- * PHP 5.6 generator created by Victor MECH - April 2016
-*/
 
 namespace LazyEight\DiTesto\ValueObject;
-
 
 use LazyEight\BasicTypes\Interfaces\ValueObjectInterface;
 use LazyEight\BasicTypes\Stringy;
 
+/**
+ * Class AbstractFileContent
+ * @package LazyEight\DiTesto\ValueObject
+ */
 abstract class AbstractFileContent implements ValueObjectInterface
 {
     /*
@@ -29,17 +27,17 @@ abstract class AbstractFileContent implements ValueObjectInterface
     /**
      * @return Stringy Raw content
      */
-    public function getValue()
+    public function getValue() : Stringy
     {
         return clone $this->content;
     }
-	
+
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->content->getValue();
     }
-	
+
 }

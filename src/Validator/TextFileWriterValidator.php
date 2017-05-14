@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: victor
- * Date: 10/04/16
- * Time: 23:33
- */
 
 namespace LazyEight\DiTesto\Validator;
 
-
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
+use LazyEight\DiTesto\ValueObject\FileLocation;
 use LazyEight\DiTesto\ValueObject\TextFile\TextFile;
 
 class TextFileWriterValidator extends AbstractTextFileValidator
@@ -32,7 +26,7 @@ class TextFileWriterValidator extends AbstractTextFileValidator
      * @throws InvalidFileLocationException
      * @return bool
      */
-    public function validate()
+    public function validate() : bool
     {
         return $this->validateFilePath();
     }
@@ -41,11 +35,12 @@ class TextFileWriterValidator extends AbstractTextFileValidator
      * @throws InvalidFileLocationException
      * @return bool
      */
-    protected function validateFile()
+    protected function validateFile() : bool
     {
         if ($this->file->exists()) {
             return $this->validateIsWriteable();
         }
+
         return $this->validateFilePath();
     }
 
@@ -53,11 +48,12 @@ class TextFileWriterValidator extends AbstractTextFileValidator
      * @throws InvalidFileLocationException
      * @return bool
      */
-    protected function validateIsWriteable()
+    protected function validateIsWriteable() : bool
     {
         if (!$this->file->isWritable()) {
             throw new InvalidFileLocationException('The file is not writable.', 104);
         }
+
         return true;
     }
 
@@ -65,19 +61,21 @@ class TextFileWriterValidator extends AbstractTextFileValidator
      * @throws InvalidFileLocationException
      * @return bool
      */
-    protected function validateFilePath()
+    protected function validateFilePath() : bool
     {
         $fileDir = $this->file->getLocation()->getFileDirectory();
+
         if (!is_writable($fileDir->getValue())) {
             throw new InvalidFileLocationException("The directory {$fileDir->getValue()} is not writable.", 103);
         }
+
         return true;
     }
 
     /**
      * @inheritDoc
      */
-    protected function getFileLocation()
+    protected function getFileLocation() : FileLocation
     {
         return $this->file->getLocation();
     }

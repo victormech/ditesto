@@ -1,12 +1,6 @@
 <?php
-/**
- * Created with PHP 5.6 generator
- * User: Victor Ribeiro <victormech@gmail.com>
- * PHP 5.6 generator created by Victor MECH - April 2016
-*/
 
 namespace LazyEight\DiTesto;
-
 
 use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
@@ -49,18 +43,18 @@ class TextFileLoader
      * @throws InvalidFileTypeException
      * @return TextFile The text file itself
      */
-    public function loadFile()
+    public function loadFile() : TextFile
     {
         $this->validateFile();
         $this->rawContent = $this->loadFileFromDisk();
-        $this->file = $this->createFileObject();
+        $this->file = $this->buildFileObject();
         return clone $this->file;
     }
 	
     /**
      * @return FileContent
      */
-    protected function loadFileFromDisk()
+    protected function loadFileFromDisk() : FileContent
     {
         return new FileContent(new Stringy(file_get_contents($this->fileLocation->getValue())));
     }
@@ -68,7 +62,7 @@ class TextFileLoader
     /**
      * @return TextFile
      */
-    protected function createFileObject()
+    protected function buildFileObject() : TextFile
     {
         $parser = new TextContentParser($this->rawContent);
         return new TextFile($this->fileLocation, $this->rawContent, $parser->parse());
@@ -79,7 +73,7 @@ class TextFileLoader
      * @throws InvalidFileTypeException
      * @return bool
      */
-    protected function validateFile()
+    protected function validateFile() : bool
     {
         return (new TextFileLoaderValidator($this->fileLocation))->validate();
     }

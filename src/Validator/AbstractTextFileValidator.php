@@ -1,18 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: victor
- * Date: 10/04/16
- * Time: 23:42
- */
 
 namespace LazyEight\DiTesto\Validator;
-
 
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
 use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 
+/**
+ * Class AbstractTextFileValidator
+ * @package LazyEight\DiTesto\Validator
+ */
 abstract class AbstractTextFileValidator
 {
     /**
@@ -23,7 +20,7 @@ abstract class AbstractTextFileValidator
     /**
      * @return bool
      */
-    abstract public function validate();
+    abstract public function validate() : bool;
 
     /**
      * @throws InvalidFileLocationException If file not exists
@@ -42,6 +39,7 @@ abstract class AbstractTextFileValidator
     {
         $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
         $rawInfo = finfo_file($fileInfo, $this->getFileLocation()->getValue());
+
         if ($rawInfo !== $this->allowedMimeType) {
             throw new InvalidFileTypeException($this->getFileContentErrorMessage($rawInfo), 102);
         }

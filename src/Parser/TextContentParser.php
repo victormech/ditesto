@@ -1,17 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: victor
- * Date: 09/04/16
- */
 
 namespace LazyEight\DiTesto\Parser;
-
 
 use LazyEight\DiTesto\ValueObject\AbstractFileContent;
 use LazyEight\DiTesto\ValueObject\TextFile\Line;
 use LazyEight\DiTesto\ValueObject\TextFile\TextContent;
 
+/**
+ * Class TextContentParser
+ * @package LazyEight\DiTesto\Parser
+ */
 class TextContentParser
 {
     /**
@@ -30,7 +28,7 @@ class TextContentParser
     /**
      * @return TextContent
      */
-    public function parse()
+    public function parse() : TextContent
     {
         return new TextContent($this->content->getValue(), $this->convertContentToLines());
     }
@@ -38,13 +36,14 @@ class TextContentParser
     /**
      * @return array
      */
-    protected function convertContentToLines()
+    protected function convertContentToLines() : array
     {
         $lines = array();
         $arrLines = $this->content->getValue()->split('\n');
         foreach ($arrLines as $value) {
             $lines[] = new Line($value);
         }
+
         return $lines;
     }
 }
