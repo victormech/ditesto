@@ -22,6 +22,7 @@ composer.lock
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea/php.xml
 
 # Gradle:
 .idea/gradle.xml
