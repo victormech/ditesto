@@ -38,7 +38,10 @@ class TextFileWriter
      */
     protected function writeFileToDisk()
     {
-        file_put_contents($this->file->getLocation()->getValue(), $this->file->getRawContent()->getValue());
+        file_put_contents(
+            $this->file->getLocation()->getValue(),
+            $this->file->getRawContent()->getValue()
+        );
     }
 
     /**

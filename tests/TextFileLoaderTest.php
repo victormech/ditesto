@@ -1,21 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Victor Ribeiro <victormech@gmail.com>
- * Date: 09/04/16
- */
 
 namespace Test\DiTesto;
 
-
-use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
 use LazyEight\DiTesto\TextFileLoader;
 use LazyEight\DiTesto\ValueObject\FileLocation;
 use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
 use LazyEight\DiTesto\ValueObject\TextFile\TextFile;
+use PHPUnit\Framework\TestCase;
 
-class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
+class TextFileLoaderTest extends TestCase
 {
     /**
      * @var string
@@ -34,7 +28,7 @@ class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanBeCreated()
     {
-        $filename = new Stringy($this->file);
+        $filename = $this->file;
         $instance = new TextFileLoader(new FileLocation($filename));
         $this->assertInstanceOf(TextFileLoader::class, $instance);
         return $instance;
@@ -65,7 +59,7 @@ class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCantBeLoaded()
     {
-        $textLoader = new TextFileLoader(new FileLocation(new Stringy($this->imageFile)));
+        $textLoader = new TextFileLoader(new FileLocation($this->imageFile));
         $this->expectException(InvalidFileTypeException::class);
         $textLoader->loadFile();
     }
@@ -78,7 +72,7 @@ class TextFileLoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testCantBeLoadedInvaidLocation()
     {
-        $textLoader = new TextFileLoader(new FileLocation(new Stringy('abc_'.$this->imageFile)));
+        $textLoader = new TextFileLoader(new FileLocation('abc_'.$this->imageFile));
         $this->expectException(InvalidFileLocationException::class);
         $textLoader->loadFile();
     }

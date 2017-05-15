@@ -3,11 +3,11 @@
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/f88230aa-4a8e-46eb-b1c2-c7c4de61e6f2/small.png)](https://insight.sensiolabs.com/projects/f88230aa-4a8e-46eb-b1c2-c7c4de61e6f2)
 ##### A simple Object Oriented library to load and manipulate text files with PHP. Made for who is so Object Oriented addicted like me :)
-PHP minimum version: 5.6
+PHP minimum version: 7
 
 ## Usage
 ```php
-$file = new Stringy('/home/user/text-file.txt');
+$file = '/home/user/text-file.txt';
 $fileLoader = new TextFileLoader(new FileLocation($file));
 $textFile = $fileLoader->loadFile();
 echo $textFile;

@@ -1,20 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: victor
- * Date: 10/04/16
- * Time: 02:08
- */
 
 namespace Test\DiTesto;
-
 
 use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\ValueObject\File;
 use LazyEight\DiTesto\ValueObject\FileContent;
 use LazyEight\DiTesto\ValueObject\FileLocation;
+use PHPUnit\Framework\TestCase;
 
-class FileTest extends \PHPUnit_Framework_TestCase
+class FileTest extends TestCase
 {
     /**
      * @var string
@@ -30,8 +24,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanBeCreated()
     {
-        $location = new FileLocation(new Stringy($this->file));
-        $content = new FileContent(new Stringy(file_get_contents($this->file)));
+        $location = new FileLocation($this->file);
+        $content = new FileContent(file_get_contents($this->file));
         $instance = new File($location, $content);
         $this->assertInstanceOf(File::class, $instance);
         return $instance;
@@ -47,7 +41,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testLocationCanBeRetrieved(File $file)
     {
-        $location = new FileLocation(new Stringy($this->file));
+        $location = new FileLocation($this->file);
         $this->assertEquals($location, $file->getLocation());
         $this->assertNotEquals($location->getValue(), $file->getLocation());
     }
@@ -62,9 +56,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testContentCanBeRetrieved(File $file)
     {
-        $content = new FileContent(new Stringy(file_get_contents($this->file)));
-        $this->assertEquals($content, $file->getRawContent());
-        $this->assertNotEquals($content->getValue(), $file->getRawContent());
+        $content = file_get_contents($this->file);
+        $this->assertEquals($content, $file->getRawContent()->getValue());
+        $this->assertNotEquals('ABC', $file->getRawContent()->getValue());
     }
 
     /**

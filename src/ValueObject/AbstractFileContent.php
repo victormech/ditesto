@@ -3,7 +3,6 @@
 namespace LazyEight\DiTesto\ValueObject;
 
 use LazyEight\BasicTypes\Interfaces\ValueObjectInterface;
-use LazyEight\BasicTypes\Stringy;
 
 /**
  * Class AbstractFileContent
@@ -17,19 +16,19 @@ abstract class AbstractFileContent implements ValueObjectInterface
     protected $content;
 
     /**
-     * @param Stringy $content
+     * @param $content
      */
-    public function __construct(Stringy $content)
+    public function __construct($content)
     {
         $this->content = $content;
     }
 
     /**
-     * @return Stringy Raw content
+     * @return mixed
      */
-    public function getValue() : Stringy
+    public function getValue()
     {
-        return clone $this->content;
+        return $this->content;
     }
 
     /**
@@ -37,7 +36,6 @@ abstract class AbstractFileContent implements ValueObjectInterface
      */
     public function __toString() : string
     {
-        return $this->content->getValue();
+        return (string) $this->content;
     }
-
 }

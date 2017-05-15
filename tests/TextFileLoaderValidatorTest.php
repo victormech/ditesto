@@ -1,21 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: victor
- * Date: 09/04/16
- * Time: 21:09
- */
 
 namespace Test\DiTesto;
 
-
-use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
 use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
 use LazyEight\DiTesto\Validator\TextFileLoaderValidator;
 use LazyEight\DiTesto\ValueObject\FileLocation;
+use PHPUnit\Framework\TestCase;
 
-class TextFileValidatorTest extends \PHPUnit_Framework_TestCase
+class TextFileValidatorTest extends TestCase
 {
     /**
      * @var string
@@ -34,7 +27,7 @@ class TextFileValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanBeCreated()
     {
-        $filename = new Stringy($this->file);
+        $filename = $this->file;
         $instance = new TextFileLoaderValidator(new FileLocation($filename));
         $this->assertInstanceOf(TextFileLoaderValidator::class, $instance);
         return $instance;
@@ -65,7 +58,7 @@ class TextFileValidatorTest extends \PHPUnit_Framework_TestCase
     public function testLocationValidation()
     {
         $this->expectException(InvalidFileLocationException::class);
-        $fileLocationError = new Stringy('abc/' . $this->file);
+        $fileLocationError = 'abc/'.$this->file;
         (new TextFileLoaderValidator(new FileLocation($fileLocationError)))->validate();
     }
 
@@ -77,7 +70,7 @@ class TextFileValidatorTest extends \PHPUnit_Framework_TestCase
     public function testFileTypeValidation()
     {
         $this->expectException(InvalidFileTypeException::class);
-        $fileLocationError = new Stringy($this->imageFile);
+        $fileLocationError = $this->imageFile;
         (new TextFileLoaderValidator(new FileLocation($fileLocationError)))->validate();
     }
 }

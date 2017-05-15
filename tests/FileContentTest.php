@@ -1,18 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: victor
- * Date: 10/04/16
- * Time: 02:04
- */
 
 namespace Test\DiTesto;
 
-
 use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\ValueObject\FileContent;
+use PHPUnit\Framework\TestCase;
 
-class FileContentTest extends \PHPUnit_Framework_TestCase
+class FileContentTest extends TestCase
 {
     /**
      * @var string
@@ -26,7 +20,7 @@ class FileContentTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanBeCreated()
     {
-        $instance = new FileContent(new Stringy(file_get_contents($this->file)));
+        $instance = new FileContent(file_get_contents($this->file));
         $this->assertInstanceOf(FileContent::class, $instance);
         return $instance;
     }
@@ -41,7 +35,7 @@ class FileContentTest extends \PHPUnit_Framework_TestCase
      */
     public function testValueCanBeRetrieved(FileContent $content)
     {
-        $this->assertEquals($content->getValue()->getValue(), new Stringy(file_get_contents($this->file)));
+        $this->assertEquals($content->getValue(), file_get_contents($this->file));
     }
 
     /**

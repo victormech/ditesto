@@ -2,6 +2,7 @@
 
 namespace LazyEight\DiTesto\Parser;
 
+use LazyEight\BasicTypes\JString;
 use LazyEight\DiTesto\ValueObject\AbstractFileContent;
 use LazyEight\DiTesto\ValueObject\TextFile\Line;
 use LazyEight\DiTesto\ValueObject\TextFile\TextContent;
@@ -39,7 +40,8 @@ class TextContentParser
     protected function convertContentToLines() : array
     {
         $lines = array();
-        $arrLines = $this->content->getValue()->split('\n');
+        $jContent = new JString($this->content->getValue());
+        $arrLines = $jContent->split('\n');
         foreach ($arrLines as $value) {
             $lines[] = new Line($value);
         }

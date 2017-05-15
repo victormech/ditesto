@@ -1,18 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: victor
- * Date: 10/04/16
- * Time: 01:40
- */
 
 namespace Test\DiTesto;
 
-
 use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\ValueObject\FileLocation;
+use PHPUnit\Framework\TestCase;
 
-class FileLocationTest extends \PHPUnit_Framework_TestCase
+class FileLocationTest extends TestCase
 {
     /**
      * @var string
@@ -26,7 +20,7 @@ class FileLocationTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanBeCreated()
     {
-        $instance = new FileLocation(new Stringy($this->file));
+        $instance = new FileLocation($this->file);
         $this->assertInstanceOf(FileLocation::class, $instance);
         return $instance;
     }
@@ -40,6 +34,6 @@ class FileLocationTest extends \PHPUnit_Framework_TestCase
      */
     public function testValueCanBeRetrieved(FileLocation $location)
     {
-        $this->assertEquals($location->getValue()->getValue(), $this->file);
+        $this->assertEquals($location->getValue(), $this->file);
     }
 }

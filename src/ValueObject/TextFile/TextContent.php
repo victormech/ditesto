@@ -20,7 +20,7 @@ class TextContent extends AbstractFileContent
     /**
      * @inheritDoc
      */
-    public function __construct(Stringy $content, array $lines)
+    public function __construct(string $content, array $lines)
     {
         parent::__construct($content);
         $this->lines = $lines;

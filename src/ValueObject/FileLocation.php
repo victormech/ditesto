@@ -3,19 +3,19 @@
 namespace LazyEight\DiTesto\ValueObject;
 
 use LazyEight\BasicTypes\Interfaces\ValueObjectInterface;
-use LazyEight\BasicTypes\Stringy;
+use LazyEight\BasicTypes\JString;
 
 class FileLocation implements ValueObjectInterface
 {
     /**
-     * @var Stringy
+     * @var string
      */
     private $location;
     
     /**
-     * @param Stringy $location
+     * @param string $location
      */
-    public function __construct(Stringy $location)
+    public function __construct(string $location)
     {
         $this->location = $location;
     }
@@ -25,15 +25,16 @@ class FileLocation implements ValueObjectInterface
      */
     public function getValue()
     {
-        return clone $this->location;
+        return $this->location;
     }
 
     /**
-     * @return Stringy
+     * @return string
      */
     public function getFileDirectory()
     {
-        return $this->location->substring(0, $this->location->lastIndexOf("/"));
+        $jString = new JString($this->location);
+        return $jString->substring(0, $jString->lastIndexOf("/"));
     }
 
     /**
@@ -41,6 +42,6 @@ class FileLocation implements ValueObjectInterface
      */
     public function isWritable()
     {
-        return is_writable($this->location->getValue());
+        return is_writable($this->location);
     }
 }

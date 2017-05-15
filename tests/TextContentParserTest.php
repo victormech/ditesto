@@ -1,20 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: victor
- * Date: 10/04/16
- * Time: 01:38
- */
 
 namespace Test\DiTesto;
 
-
-use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\Parser\TextContentParser;
 use LazyEight\DiTesto\ValueObject\FileContent;
 use LazyEight\DiTesto\ValueObject\TextFile\Line;
+use PHPUnit\Framework\TestCase;
 
-class TextContentParserTest extends \PHPUnit_Framework_TestCase
+class TextContentParserTest extends TestCase
 {
     /**
      * @var string
@@ -28,7 +21,7 @@ class TextContentParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanBeCreated()
     {
-        $content = new Stringy(file_get_contents($this->file));
+        $content = file_get_contents($this->file);
         $instance = new TextContentParser(new FileContent($content));
         $this->assertInstanceOf(TextContentParser::class, $instance);
         return $instance;
@@ -46,15 +39,15 @@ class TextContentParserTest extends \PHPUnit_Framework_TestCase
      */
     public function testCanBeParsed(TextContentParser $loader)
     {
-        $content = new Stringy(file_get_contents($this->file));
+        $content = file_get_contents($this->file);
         $textContent = $loader->parse();
         $this->assertEquals($textContent->getValue(), $content);
         $this->assertArraySubset($this->getLinesArray($content), $textContent->getLines());
     }
 
-    private function getLinesArray(Stringy $content)
+    private function getLinesArray(string $content)
     {
-        $linesArr = $content->split('\n');
+        $linesArr = mb_split('\n', $content);
         $linesCount = count($linesArr);
         for ($i = 0; $i < $linesCount; $i++) {
             $linesArr[$i] = new Line($linesArr[$i]);

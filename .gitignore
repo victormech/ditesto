@@ -23,7 +23,7 @@ composer.lock
 .idea/dynamic.xml
 .idea/uiDesigner.xml
 .idea/php.xml
-.ideia/*.*
+.ideia/
 
 # Gradle:
 .idea/gradle.xml

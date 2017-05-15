@@ -65,6 +65,6 @@ class File
      */
     public function __toString() : string
     {
-        return $this->getRawContent()->getValue()->getValue();
+        return $this->getRawContent()->getValue();
     }
 }

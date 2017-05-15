@@ -2,7 +2,6 @@
 
 namespace LazyEight\DiTesto;
 
-use LazyEight\BasicTypes\Stringy;
 use LazyEight\DiTesto\Exceptions\InvalidFileLocationException;
 use LazyEight\DiTesto\Exceptions\InvalidFileTypeException;
 use LazyEight\DiTesto\Parser\TextContentParser;
@@ -50,24 +49,27 @@ class TextFileLoader
         $this->file = $this->buildFileObject();
         return clone $this->file;
     }
-	
+
     /**
      * @return FileContent
      */
     protected function loadFileFromDisk() : FileContent
     {
-        return new FileContent(new Stringy(file_get_contents($this->fileLocation->getValue())));
+        return new FileContent(file_get_contents($this->fileLocation->getValue()));
     }
-	
+
     /**
      * @return TextFile
      */
     protected function buildFileObject() : TextFile
     {
-        $parser = new TextContentParser($this->rawContent);
-        return new TextFile($this->fileLocation, $this->rawContent, $parser->parse());
+        return new TextFile(
+            $this->fileLocation,
+            $this->rawContent,
+            (new TextContentParser($this->rawContent))->parse()
+        );
     }
-	
+
     /**
      * @throws InvalidFileLocationException
      * @throws InvalidFileTypeException
