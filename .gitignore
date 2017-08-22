@@ -24,6 +24,8 @@ composer.lock
 .idea/uiDesigner.xml
 .idea/php.xml
 .ideia/
+.ideia/*
+.ideia
 
 # Gradle:
 .idea/gradle.xml
@@ -56,3 +58,4 @@ fabric.properties
 *.iml
 misc.xml
 modules.xml
+tests/_reports
