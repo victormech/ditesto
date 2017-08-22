@@ -13,21 +13,17 @@ echo $textFile;
 ```
 You can iterate line per line if you want:
 ```php
-$lines = $textFile->getTextContent()->getLines();
-foreach ($lines as $line) {
+$textFile = (new TextReader($file))->readFile();
+foreach ($textFile as $line) {
    echo $line;
 }
 ```
-More useful methods :
+You can iterate like an Array :
 ```php
-echo $textFile->lineAt(3);
-echo $textFile->count();
-echo $textFile->firstLine();
-echo $textFile->lastLine();
+echo $textFile[0];
+$textFile[] = new Line('This is a new line');
+echo count($textFile);
 ```
-## UML Documentation
- See the documentation on [GenMyModel](https://repository.genmymodel.com/victormech/LazyEight-File-Loader "UML") website
-
 ## License
   
 The MIT License (MIT). Please see [License File](https://github.com/victormech/basic-types/blob/master/LICENSE) for more information.
