@@ -40,7 +40,7 @@ class TextFileReaderTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\TextFileReader::readFile
-     * @covers \LazyEight\DiTesto\TextFileReader::valid
+     * @covers \LazyEight\DiTesto\TextFileReader::validate
      * @covers \LazyEight\DiTesto\TextFileReader::validatePath
      * @covers \LazyEight\DiTesto\TextFileReader::validateReadable
      * @covers \LazyEight\DiTesto\TextFileReader::validateType
@@ -56,7 +56,7 @@ class TextFileReaderTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\TextFileReader::readFile
-     * @covers \LazyEight\DiTesto\TextFileReader::valid
+     * @covers \LazyEight\DiTesto\TextFileReader::validate
      * @covers \LazyEight\DiTesto\TextFileReader::validatePath
      * @expectedException \LazyEight\DiTesto\Exceptions\IOException
      * @uses \LazyEight\DiTesto\TextFileReader
@@ -70,7 +70,7 @@ class TextFileReaderTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\TextFileReader::readFile
-     * @covers \LazyEight\DiTesto\TextFileReader::valid
+     * @covers \LazyEight\DiTesto\TextFileReader::validate
      * @covers \LazyEight\DiTesto\TextFileReader::validatePath
      * @covers \LazyEight\DiTesto\TextFileReader::validateType
      * @expectedException \LazyEight\DiTesto\Exceptions\IOException
@@ -84,7 +84,7 @@ class TextFileReaderTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\TextFileReader::readFile
-     * @covers \LazyEight\DiTesto\TextFileReader::valid
+     * @covers \LazyEight\DiTesto\TextFileReader::validate
      * @covers \LazyEight\DiTesto\TextFileReader::validatePath
      * @covers \LazyEight\DiTesto\TextFileReader::validateReadable
      * @expectedException \LazyEight\DiTesto\Exceptions\IOException
