@@ -7,21 +7,25 @@ PHP minimum version: 7
 ## Usage
 ```php
 $file = '/home/user/text-file.txt';
-$textFile = (new TextReader($file))->readFile();
+$textFile = (new TextFileReader($file))->readFile();
 echo $textFile;
 ```
 You can iterate line per line if you want:
 ```php
-$textFile = (new TextReader($file))->readFile();
+$textFile = (new TextFileReader($file))->readFile();
 foreach ($textFile as $line) {
    echo $line;
 }
 ```
-You can iterate like an Array :
+Or even like an Array:
 ```php
 echo $textFile[0];
 $textFile[] = new Line('This is a new line');
 echo count($textFile);
+```
+To persist your changes:
+```php
+(new TextFileWriter())->writeFile($textFile)
 ```
 ## License
   
