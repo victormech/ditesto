@@ -51,7 +51,6 @@ class TextFileReaderTest extends TestCase
      */
     public function testCanBeLoaded(TextFileReader $loader)
     {
-        $file = $loader->readFile();
         $this->assertInstanceOf(TextFile::class, $loader->readFile());
     }
 
