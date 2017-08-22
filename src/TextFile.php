@@ -59,6 +59,10 @@ class TextFile implements
      */
     public function isWritable(): bool
     {
+        if (!$this->exists() && is_writable($this->getPath())) {
+            return true;
+        }
+
         return is_writable($this->path);
     }
 

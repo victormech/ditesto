@@ -27,7 +27,7 @@ class TextFileReader implements FileReaderInterface
      */
     public function readFile():FileInterface
     {
-        $this->valid($this->getPath());
+        $this->validate($this->getPath());
 
         $textFile = new TextFile($this->getPath());
         $textFile->read();
@@ -43,13 +43,20 @@ class TextFileReader implements FileReaderInterface
         return $this->path;
     }
 
-    private function valid(string $path)
+    /**
+     * @param string $path
+     */
+    private function validate(string $path)
     {
         $this->validatePath($path);
         $this->validateReadable($path);
         $this->validateType($path);
     }
 
+    /**
+     * @param string $path
+     * @throws IOException
+     */
     private function validatePath(string $path)
     {
         if (empty($path)) {
@@ -57,6 +64,10 @@ class TextFileReader implements FileReaderInterface
         }
     }
 
+    /**
+     * @param string $path
+     * @throws IOException
+     */
     private function validateType(string $path)
     {
         if ('text/plain' !== mime_content_type($path)) {
@@ -64,6 +75,10 @@ class TextFileReader implements FileReaderInterface
         }
     }
 
+    /**
+     * @param string $path
+     * @throws IOException
+     */
     private function validateReadable(string $path)
     {
         if (!(new TextFile($path))->isReadable()) {
