@@ -2,13 +2,8 @@
 
 namespace LazyEight\DiTesto\Interfaces;
 
-interface WritableFileInterface
+interface WritableFileInterface extends WritableInterface
 {
-    /**
-     * @return mixed
-     */
-    public function write();
-
     /**
      * @return bool
      */

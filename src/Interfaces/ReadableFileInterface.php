@@ -2,9 +2,8 @@
 
 namespace LazyEight\DiTesto\Interfaces;
 
-interface ReadableFileInterface
+interface ReadableFileInterface extends ReadableInterface
 {
-    public function read();
     /**
      * @return bool
      */

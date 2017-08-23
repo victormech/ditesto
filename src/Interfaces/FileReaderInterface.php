@@ -7,5 +7,5 @@ interface FileReaderInterface
     /**
      * @return FileInterface
      */
-    public function readFile():FileInterface;
+    public function readFile(ReadableFileInterface $file);
 }

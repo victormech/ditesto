@@ -25,87 +25,40 @@ class TextFileReaderTest extends TestCase
     protected $notReadable = './tests/files/urls_not_readable.txt';
 
     /**
-     * @covers \LazyEight\DiTesto\TextFileReader::__construct
-     * @uses \LazyEight\DiTesto\TextFileReader
-     * @return \LazyEight\DiTesto\TextFileReader
-     */
-    public function testCanBeCreated()
-    {
-        $filename = $this->file;
-        $instance = new TextFileReader($filename);
-        $this->assertInstanceOf(TextFileReader::class, $instance);
-
-        return $instance;
-    }
-
-    /**
      * @covers \LazyEight\DiTesto\TextFileReader::readFile
-     * @covers \LazyEight\DiTesto\TextFileReader::validate
-     * @covers \LazyEight\DiTesto\TextFileReader::validatePath
-     * @covers \LazyEight\DiTesto\TextFileReader::validateReadable
-     * @covers \LazyEight\DiTesto\TextFileReader::validateType
      * @uses \LazyEight\DiTesto\TextFileReader
-     * @depends testCanBeCreated
      * @uses \LazyEight\DiTesto\TextFileReader
      * @param \LazyEight\DiTesto\TextFileLoader
      */
-    public function testCanBeLoaded(TextFileReader $loader)
+    public function testCanRead()
     {
-        $this->assertInstanceOf(TextFile::class, $loader->readFile());
+        $textFile = new TextFile($this->file);
+        (new TextFileReader())->readFile($textFile);
+
+        $arrFile = explode(PHP_EOL, file_get_contents($this->file));
+        $this->assertTrue(count($arrFile) === count($textFile));
     }
 
     /**
      * @covers \LazyEight\DiTesto\TextFileReader::readFile
-     * @covers \LazyEight\DiTesto\TextFileReader::validate
-     * @covers \LazyEight\DiTesto\TextFileReader::validatePath
      * @expectedException \LazyEight\DiTesto\Exceptions\IOException
      * @uses \LazyEight\DiTesto\TextFileReader
      */
     public function testCantBeLoaded()
     {
-        $loader = new TextFileReader('');
         $this->expectException(IOException::class);
-        $loader->readFile();
+        (new TextFileReader())->readFile(new TextFile(''));
     }
 
     /**
      * @covers \LazyEight\DiTesto\TextFileReader::readFile
-     * @covers \LazyEight\DiTesto\TextFileReader::validate
-     * @covers \LazyEight\DiTesto\TextFileReader::validatePath
-     * @covers \LazyEight\DiTesto\TextFileReader::validateType
-     * @expectedException \LazyEight\DiTesto\Exceptions\IOException
-     */
-    public function testInvalidType()
-    {
-        $instance = new TextFileReader($this->imageFile);
-        $this->expectException(IOException::class);
-        $instance->readFile();
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFileReader::readFile
-     * @covers \LazyEight\DiTesto\TextFileReader::validate
-     * @covers \LazyEight\DiTesto\TextFileReader::validatePath
-     * @covers \LazyEight\DiTesto\TextFileReader::validateReadable
      * @expectedException \LazyEight\DiTesto\Exceptions\IOException
      */
     public function testCantRead()
     {
         chmod($this->notReadable, 0000);
 
-        $instance = new TextFileReader($this->notReadable);
         $this->expectException(IOException::class);
-        $instance->readFile();
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFileReader::readFile
-     * @covers \LazyEight\DiTesto\TextFileReader::getPath
-     * @uses \LazyEight\DiTesto\TextFileReader
-     */
-    public function testCanGetPath()
-    {
-        $loader = new TextFileReader($this->file);
-        $this->assertEquals($this->file, $loader->getPath());
+        (new TextFileReader())->readFile(new TextFile($this->notReadable));
     }
 }
