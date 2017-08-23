@@ -8,6 +8,7 @@ PHP minimum version: 7
 ```php
 $file = '/home/user/text-file.txt';
 $textFile = new TextFile($file); 
+(new TextFileReader())->readFile($textFile);
 echo $textFile; // prints all file content
 ```
 You can iterate line per line if you want:
