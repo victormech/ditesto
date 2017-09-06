@@ -2,120 +2,44 @@
 
 namespace LazyEight\DiTesto;
 
-use LazyEight\DiTesto\Interfaces\FileInterface;
-use LazyEight\DiTesto\Interfaces\MeasurableFileInterface;
-use LazyEight\DiTesto\Interfaces\ReadableFileInterface;
+use LazyEight\DiTesto\Collections\ArrayObjectLine;
 use LazyEight\DiTesto\Interfaces\TraversableFileInterface;
-use LazyEight\DiTesto\Interfaces\TypableFileInterface;
-use LazyEight\DiTesto\Interfaces\WritableFileInterface;
-use Traversable;
 
-class TextFile implements
-    ReadableFileInterface,
-    WritableFileInterface,
-    MeasurableFileInterface,
-    TypableFileInterface,
-    FileInterface,
-    TraversableFileInterface
+class TextFile extends File implements TraversableFileInterface
 {
-    /**
-     * @var string
-     */
-    private $path;
-
     /**
      * @var ArrayObjectLine
      */
     private $lines;
 
     /**
-     * TextFile constructor.
-     * @param string $path
+     * @inheritDoc
      */
-    public function __construct(string $path)
+    public function __construct($path, $content = '')
     {
-        $this->path = $path;
-        $this->lines = new ArrayObjectLine();
+        parent::__construct($path, $content);
+        $this->readLines($content);
     }
 
     /**
-     * @return bool
+     * @param string $content
      */
-    public function exists(): bool
-    {
-        return file_exists($this->path);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isReadable(): bool
-    {
-        return is_readable($this->path);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isWritable(): bool
-    {
-        if (!$this->exists() && is_writable($this->getPath())) {
-            return true;
-        }
-
-        return is_writable($this->path);
-    }
-
-    public function read()
+    private function readLines(string $content)
     {
         $this->lines = new ArrayObjectLine(array_map(function ($line) {
             return new Line($line);
-        }, explode(PHP_EOL, file_get_contents($this->path))));
+        }, explode(PHP_EOL, $content)));
     }
 
-    public function write()
+    public function getRawContent(): string
     {
-        file_put_contents($this->path, $this->lines->getRawContent());
+        return $this->lines->getRawContent();
     }
 
-    /**
-     * @return int
-     */
-    public function getSize(): int
+    public function setRawContent(string $content)
     {
-        return filesize($this->path);
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return mime_content_type($this->path);
-    }
-
-    /**
-     * @return string
-     */
-    public function getFilename(): string
-    {
-        return basename($this->path);
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath(): string
-    {
-        return dirname($this->path);
-    }
-
-    /**
-     * @return string
-     */
-    public function getPathName(): string
-    {
-        return $this->path;
+        parent::setRawContent($content);
+        $this->readLines($content);
     }
 
     /**
@@ -167,13 +91,5 @@ class TextFile implements
     public function count()
     {
         return $this->lines->count();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __toString()
-    {
-        return $this->lines->getRawContent();
     }
 }

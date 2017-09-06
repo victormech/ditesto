@@ -29,7 +29,7 @@ class LineTest extends TestCase
      * @covers \LazyEight\DiTesto\Line::getContent
      * @covers \LazyEight\DiTesto\Line::__construct
      * @depends testCanBeCreated
-     * @uses \LazyEight\DiTesto\TextFileReader
+     * @uses \LazyEight\DiTesto\FileReader
      */
     public function testCanGetContent(Line $line)
     {
@@ -40,7 +40,7 @@ class LineTest extends TestCase
      * @covers \LazyEight\DiTesto\Line::__toString
      * @covers \LazyEight\DiTesto\Line::__construct
      * @depends testCanBeCreated
-     * @uses \LazyEight\DiTesto\TextFileReader
+     * @uses \LazyEight\DiTesto\FileReader
      */
     public function testCanToString(Line $line)
     {

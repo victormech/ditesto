@@ -2,7 +2,7 @@
 
 namespace Test\DiTesto;
 
-use LazyEight\DiTesto\ArrayObjectLine;
+use LazyEight\DiTesto\Collections\ArrayObjectLine;
 use PHPUnit\Framework\TestCase;
 
 class ArrayObjectLineTest extends TestCase
@@ -10,9 +10,9 @@ class ArrayObjectLineTest extends TestCase
     protected $textToTest = 'the possibility that there are detectable and measurable patterns that indicate the';
 
     /**
-     * @covers \LazyEight\DiTesto\ArrayObjectLine::__construct
-     * @uses \LazyEight\DiTesto\ArrayObjectLine
-     * @return \LazyEight\DiTesto\ArrayObjectLine
+     * @covers \LazyEight\DiTesto\Collections\ArrayObjectLine::__construct
+     * @uses \LazyEight\DiTesto\Collections\ArrayObjectLine
+     * @return \LazyEight\DiTesto\Collections\ArrayObjectLine
      */
     public function testCanBeCreated()
     {
@@ -23,7 +23,7 @@ class ArrayObjectLineTest extends TestCase
     }
 
     /**
-     * @covers \LazyEight\DiTesto\ArrayObjectLine::getRawContent
+     * @covers \LazyEight\DiTesto\Collections\ArrayObjectLine::getRawContent
      * @depends testCanBeCreated
      */
     public function testCanReturnTheContent(ArrayObjectLine $arrayObjectLine)

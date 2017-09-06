@@ -2,11 +2,15 @@
 
 namespace LazyEight\DiTesto\Interfaces;
 
+use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemHandlerInterface;
+
 interface FileWriterInterface
 {
     /**
-     * @param WritableFileInterface $file
-     * @return mixed
+     * Write a file to a file system.
+     * @param FileInterface $file
+     * @param FileSystemHandlerInterface $fileSystemHandler
+     * @return void
      */
-    public function writeFile(WritableFileInterface $file);
+    public function writeFile(FileInterface $file, FileSystemHandlerInterface $fileSystemHandler);
 }

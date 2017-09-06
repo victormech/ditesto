@@ -2,9 +2,24 @@
 
 namespace LazyEight\DiTesto\Interfaces;
 
-interface FileInterface
+interface FileInterface extends PrintableContentInterface
 {
-    public function getFilename():string;
+    /**
+     * Returns the path of the file.
+     * @return string
+     */
     public function getPath():string;
-    public function getPathName():string;
+
+    /**
+     * Returns the raw content of the file.
+     * @return string
+     */
+    public function getRawContent():string;
+
+    /**
+     * Sets the raw content of the file.
+     * @param string $content
+     * @return void
+     */
+    public function setRawContent(string $content);
 }

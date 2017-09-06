@@ -3,12 +3,13 @@
 namespace Test\DiTesto;
 
 use LazyEight\DiTesto\Exceptions\IOException;
+use LazyEight\DiTesto\FileSystem\FileSystemHandler;
 use LazyEight\DiTesto\Line;
 use LazyEight\DiTesto\TextFile;
-use LazyEight\DiTesto\TextFileWriter;
+use LazyEight\DiTesto\FileWriter;
 use PHPUnit\Framework\TestCase;
 
-class TextFileWriterTest extends TestCase
+class FileWriterTest extends TestCase
 {
     /**
      * @var string
@@ -31,8 +32,11 @@ class TextFileWriterTest extends TestCase
     protected $testLine = 'THIS IS A TEST LINE';
 
     /**
-     * @covers \LazyEight\DiTesto\TextFileWriter::writeFile
-     * @uses \LazyEight\DiTesto\TextFileWriter
+     * @covers \LazyEight\DiTesto\FileWriter::writeFile
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::exists
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isWritable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::write
+     * @uses \LazyEight\DiTesto\FileWriter
      */
     public function testWriteFile()
     {
@@ -40,15 +44,16 @@ class TextFileWriterTest extends TestCase
         $textFile = new TextFile($newFilename);
         $textFile[] = new Line($this->testLine);
 
-        $textFileWriter = new TextFileWriter();
-        $textFileWriter->writeFile($textFile);
-
-        $this->assertTrue($textFile->exists());
+        (new FileWriter())->writeFile($textFile, new FileSystemHandler());
+        $this->assertTrue((new FileSystemHandler())->exists($textFile->getPath()));
     }
 
     /**
-     * @covers \LazyEight\DiTesto\TextFileWriter::writeFile
-     * @uses \LazyEight\DiTesto\TextFileWriter
+     * @covers \LazyEight\DiTesto\FileWriter::writeFile
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::exists
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isWritable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::write
+     * @uses \LazyEight\DiTesto\FileWriter
      * @expectException IOException
      */
     public function testCantWriteFile()
@@ -62,7 +67,7 @@ class TextFileWriterTest extends TestCase
         $textFile[] = new Line($this->testLine);
 
         $this->expectException(IOException::class);
-        (new TextFileWriter())->writeFile($textFile);
+        (new FileWriter())->writeFile($textFile, new FileSystemHandler());
     }
 
     /**

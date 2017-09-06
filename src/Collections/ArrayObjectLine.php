@@ -1,6 +1,6 @@
 <?php
 
-namespace LazyEight\DiTesto;
+namespace LazyEight\DiTesto\Collections;
 
 use LazyEight\DiTesto\Interfaces\TextFile\TextFileContentInterface;
 

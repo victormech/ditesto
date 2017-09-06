@@ -1,31 +1,34 @@
 # DiTesto
 [![Build Status](https://travis-ci.org/victormech/ditesto.svg?branch=master)](https://travis-ci.org/victormech/ditesto) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/victormech/ditesto/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/victormech/ditesto/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/victormech/ditesto/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/victormech/ditesto/?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/grade/1072cb4bcc2846a18deed7645d1b18c1)](https://www.codacy.com/app/victormech/ditesto) [![Latest Stable Version](https://poser.pugx.org/lazyeight/ditesto/v/stable)](https://packagist.org/packages/lazyeight/ditesto)
 
-##### A simple Object Oriented library to load and manipulate text files with PHP. Made only with PHP.
+##### A simple Object Oriented library to load and manipulate text files. Made using only PHP.
 PHP minimum version: 7
 
 ## Usage
 ```php
 $file = '/home/user/text-file.txt';
-$textFile = (new TextFileReader($file))->readFile();
-echo $textFile;
+$textFile = new TextFile($file); 
+(new FileReader())->readFile($textFile, new FileSystemHandler());
+echo $textFile; // prints all file content
 ```
 You can iterate line per line if you want:
 ```php
-$textFile = (new TextFileReader($file))->readFile();
+$textFile = new TextFile($file); 
+(new FileReader())->readFile($textFile, new FileSystemHandler()));
 foreach ($textFile as $line) {
    echo $line;
 }
 ```
 Or even like an Array:
 ```php
-echo $textFile[0];
-$textFile[] = new Line('This is a new line');
-echo count($textFile);
+$textFile[] = new Line('Adding a new line');
+$textFile[0] = new Line('Changing an existent line');
+echo count($textFile); // prints total of lines
+echo $textFile[1]; // prints only the second line 
 ```
 To persist your changes:
 ```php
-(new TextFileWriter())->writeFile($textFile)
+(new FileWriter())->writeFile($textFile, new FileSystemHandler());
 ```
 ## License
   
