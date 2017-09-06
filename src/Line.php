@@ -2,9 +2,9 @@
 
 namespace LazyEight\DiTesto;
 
-use LazyEight\DiTesto\Interfaces\TextFile\LineInterface;
+use LazyEight\DiTesto\Interfaces\PrintableContentInterface;
 
-class Line implements LineInterface
+class Line implements PrintableContentInterface
 {
     /**
      * @var string

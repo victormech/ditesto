@@ -8,13 +8,13 @@ PHP minimum version: 7
 ```php
 $file = '/home/user/text-file.txt';
 $textFile = new TextFile($file); 
-(new TextFileReader())->readFile($textFile);
+(new FileReader())->readFile($textFile, new FileSystemHandler());
 echo $textFile; // prints all file content
 ```
 You can iterate line per line if you want:
 ```php
 $textFile = new TextFile($file); 
-(new TextFileReader())->readFile($textFile);
+(new FileReader())->readFile($textFile, new FileSystemHandler()));
 foreach ($textFile as $line) {
    echo $line;
 }
@@ -28,7 +28,7 @@ echo $textFile[1]; // prints only the second line
 ```
 To persist your changes:
 ```php
-(new TextFileWriter())->writeFile($textFile);
+(new FileWriter())->writeFile($textFile, new FileSystemHandler());
 ```
 ## License
   

@@ -44,205 +44,71 @@ class TextFileTest extends TestCase
     }
 
     /**
-     * @covers \LazyEight\DiTesto\TextFile::exists
+     * @covers \LazyEight\DiTesto\TextFile::__construct
+     * @covers \LazyEight\DiTesto\TextFile::readLines
      * @uses \LazyEight\DiTesto\TextFile
-     */
-    public function testExists()
-    {
-        $this->assertTrue((new TextFile($this->file))->exists());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::exists
-     * @uses \LazyEight\DiTesto\TextFile
-     */
-    public function testNotExists()
-    {
-        $this->assertFalse((new TextFile('abc.txt'))->exists());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::isReadable
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
-     */
-    public function testIsReadable(TextFile $textFile)
-    {
-        $this->assertTrue($textFile->isReadable());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::isReadable
-     * @uses \LazyEight\DiTesto\TextFile
-     */
-    public function testNotReadable()
-    {
-        chmod($this->notReadable, 0000);
-        $this->assertFalse((new TextFile($this->notReadable))->isReadable());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::isWritable
-     * @uses \LazyEight\DiTesto\TextFile
-     */
-    public function testIsWritable()
-    {
-        $instance = new TextFile($this->file);
-        $this->assertFileIsWritable($this->file);
-        $this->assertEquals(true, $instance->isWritable());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::isWritable
-     * @uses \LazyEight\DiTesto\TextFile
-     */
-    public function testNewFileIsWritable()
-    {
-        $instance = new TextFile($this->newFilename);
-        $this->assertFileIsWritable($this->file);
-        $this->assertEquals(true, $instance->isWritable());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::isWritable
-     * @uses \LazyEight\DiTesto\TextFile
-     */
-    public function testNotWritable()
-    {
-        $instance = new TextFile($this->notReadable);
-        $this->assertFileNotIsWritable($this->notReadable);
-        $this->assertEquals(false, $instance->isWritable());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getSize
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
-     */
-    public function testGetSize(TextFile $textFile)
-    {
-        $this->assertEquals(121, $textFile->getSize());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getSize
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
-     */
-    public function testGetSizeWrongSize(TextFile $textFile)
-    {
-        $this->assertNotEquals(0, $textFile->getSize());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getSize
-     * @uses \LazyEight\DiTesto\TextFile
-     */
-    public function testGetSizeNotReadable()
-    {
-        $textFile = new TextFile($this->notReadable);
-        $this->assertEquals(121, $textFile->getSize());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getType
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
-     */
-    public function testGetType(TextFile $textFile)
-    {
-        $this->assertEquals('text/plain', $textFile->getType());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getType
-     * @uses \LazyEight\DiTesto\TextFile
-     */
-    public function testGetWrongType()
-    {
-        $textFile = new TextFile($this->imageFile);
-        $this->assertNotEquals('text/plain', $textFile->getType());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getFilename
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
-     */
-    public function testGetFilename(TextFile $textFile)
-    {
-        $this->assertEquals(basename($this->file), $textFile->getFilename());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getFilename
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
-     */
-    public function testGetWrongFilename(TextFile $textFile)
-    {
-        $this->assertNotEquals('', $textFile->getFilename());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getPath
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
-     */
-    public function testGetPath(TextFile $textFile)
-    {
-        $this->assertEquals(dirname($this->file), $textFile->getPath());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getPath
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
-     */
-    public function testGetWrongPath(TextFile $textFile)
-    {
-        $this->assertNotEquals('', $textFile->getPath());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getPathName
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
-     */
-    public function testGetPathname(TextFile $textFile)
-    {
-        $this->assertEquals($this->file, $textFile->getPathName());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::getPathName
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
-     */
-    public function testGetWrongPathname(TextFile $textFile)
-    {
-        $this->assertNotEquals('', $textFile->getPathName());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\TextFile::read
-     * @covers \LazyEight\DiTesto\TextFile::__toString
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testCanBeCreated
      * @return \LazyEight\DiTesto\TextFile
      */
-    public function testRead(TextFile $textFile)
+    public function testCanBeCreatedWithContent()
     {
-        $textFile->read();
-        $this->assertEquals(file_get_contents($this->file), $textFile->__toString());
+        $instance = new TextFile($this->file, file_get_contents($this->file));
+        $this->assertInstanceOf(TextFile::class, $instance);
+        $this->assertEquals(file_get_contents($this->file), $instance->getRawContent());
 
-        return $textFile;
+        return $instance;
+    }
+
+    /**
+     * @covers \LazyEight\DiTesto\TextFile::getRawContent
+     * @uses \LazyEight\DiTesto\File
+     * @depends testCanBeCreatedWithContent
+     * @param TextFile $file
+     */
+    public function testGetRawContent(TextFile $file)
+    {
+        $content = file_get_contents($this->file);
+        $this->assertEquals($content, $file->getRawContent());
+    }
+
+    /**
+     * @covers \LazyEight\DiTesto\TextFile::getRawContent
+     * @uses \LazyEight\DiTesto\File
+     * @depends testCanBeCreatedWithContent
+     * @param TextFile $file
+     */
+    public function testCantGetRawContent(TextFile $file)
+    {
+        $this->assertNotEquals('', $file->getRawContent());
+    }
+
+    /**
+     * @covers \LazyEight\DiTesto\TextFile::setRawContent
+     * @covers \LazyEight\DiTesto\TextFile::readLines
+     * @uses \LazyEight\DiTesto\TextFile
+     * @depends testCanBeCreated
+     */
+    public function testSetRawContent(TextFile $textFile)
+    {
+        $textFile->setRawContent(file_get_contents($this->file));
+        $this->assertEquals(file_get_contents($this->file), $textFile->getRawContent());
+    }
+
+    /**
+     * @covers \LazyEight\DiTesto\TextFile::setRawContent
+     * @covers \LazyEight\DiTesto\TextFile::readLines
+     * @uses \LazyEight\DiTesto\TextFile
+     * @depends testCanBeCreated
+     */
+    public function testSetEmptyRawContent(TextFile $textFile)
+    {
+        $textFile->setRawContent('');
+        $this->assertNotEquals(file_get_contents($this->file), $textFile->getRawContent());
     }
 
     /**
      * @covers \LazyEight\DiTesto\TextFile::getIterator
      * @uses \LazyEight\DiTesto\TextFile
-     * @depends testRead
+     * @depends testCanBeCreatedWithContent
      */
     public function testGetIterator(TextFile $textFile)
     {
@@ -252,7 +118,7 @@ class TextFileTest extends TestCase
     /**
      * @covers \LazyEight\DiTesto\TextFile::offsetExists
      * @uses \LazyEight\DiTesto\TextFile
-     * @depends testRead
+     * @depends testCanBeCreatedWithContent
      */
     public function testOffsetExists(TextFile $textFile)
     {
@@ -262,7 +128,7 @@ class TextFileTest extends TestCase
     /**
      * @covers \LazyEight\DiTesto\TextFile::offsetExists
      * @uses \LazyEight\DiTesto\TextFile
-     * @depends testRead
+     * @depends testCanBeCreatedWithContent
      */
     public function testOffsetNotExists(TextFile $textFile)
     {
@@ -272,7 +138,7 @@ class TextFileTest extends TestCase
     /**
      * @covers \LazyEight\DiTesto\TextFile::count
      * @uses \LazyEight\DiTesto\TextFile
-     * @depends testRead
+     * @depends testCanBeCreatedWithContent
      */
     public function testCount(TextFile $textFile)
     {
@@ -283,7 +149,7 @@ class TextFileTest extends TestCase
     /**
      * @covers \LazyEight\DiTesto\TextFile::offsetGet
      * @uses \LazyEight\DiTesto\TextFile
-     * @depends testRead
+     * @depends testCanBeCreatedWithContent
      */
     public function testOffsetGet(TextFile $textFile)
     {
@@ -294,7 +160,7 @@ class TextFileTest extends TestCase
     /**
      * @covers \LazyEight\DiTesto\TextFile::offsetSet
      * @uses \LazyEight\DiTesto\TextFile
-     * @depends testRead
+     * @depends testCanBeCreatedWithContent
      */
     public function testOffsetSet(TextFile $textFile)
     {
@@ -304,23 +170,9 @@ class TextFileTest extends TestCase
     }
 
     /**
-     * @covers \LazyEight\DiTesto\TextFile::write
-     * @uses \LazyEight\DiTesto\TextFile
-     * @depends testRead
-     */
-    public function testWrite(TextFile $textFile)
-    {
-        $newFile = new TextFile($this->newFilename);
-        $newFile[] = clone $textFile[0];
-        $newFile->write();
-
-        $this->assertTrue($newFile->exists());
-    }
-
-    /**
      * @covers \LazyEight\DiTesto\TextFile::offsetUnset
      * @uses \LazyEight\DiTesto\TextFile
-     * @depends testRead
+     * @depends testCanBeCreatedWithContent
      */
     public function testOffsetUnset(TextFile $textFile)
     {
@@ -339,6 +191,6 @@ class TextFileTest extends TestCase
             unlink('./tests/files/new_file.txt');
         }
 
-        parent::tearDown(); // TODO: Change the autogenerated stub
+        parent::tearDown();
     }
 }
