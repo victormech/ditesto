@@ -32,6 +32,7 @@ class FileWriterTest extends TestCase
     protected $testLine = 'THIS IS A TEST LINE';
 
     /**
+     * @covers \LazyEight\DiTesto\FileWriter::__construct
      * @covers \LazyEight\DiTesto\FileWriter::writeFile
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::exists
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isWritable
@@ -44,8 +45,8 @@ class FileWriterTest extends TestCase
         $textFile = new TextFile($newFilename);
         $textFile[] = new Line($this->testLine);
 
-        (new FileWriter())->writeFile($textFile, new FileSystemHandler());
-        $this->assertTrue((new FileSystemHandler())->exists($textFile->getPath()));
+        (new FileWriter($textFile, new FileSystemHandler($textFile->getPath())))->writeFile();
+        $this->assertTrue((new FileSystemHandler($textFile->getPath()))->exists());
     }
 
     /**
@@ -67,7 +68,7 @@ class FileWriterTest extends TestCase
         $textFile[] = new Line($this->testLine);
 
         $this->expectException(IOException::class);
-        (new FileWriter())->writeFile($textFile, new FileSystemHandler());
+        (new FileWriter($textFile, new FileSystemHandler($textFile->getPath())))->writeFile();
     }
 
     /**

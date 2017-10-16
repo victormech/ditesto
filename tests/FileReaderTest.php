@@ -26,6 +26,7 @@ class FileReaderTest extends TestCase
     protected $notReadable = './tests/files/urls_not_readable.txt';
 
     /**
+     * @covers \LazyEight\DiTesto\FileReader::__construct
      * @covers \LazyEight\DiTesto\FileReader::readFile
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isReadable
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::read
@@ -36,7 +37,7 @@ class FileReaderTest extends TestCase
     public function testCanRead()
     {
         $textFile = new TextFile($this->file);
-        (new FileReader())->readFile($textFile, new FileSystemHandler());
+        (new FileReader($textFile, new FileSystemHandler($textFile->getPath())))->readFile();
 
         $arrFile = explode(PHP_EOL, file_get_contents($this->file));
         $this->assertTrue(count($arrFile) === count($textFile));
@@ -52,7 +53,7 @@ class FileReaderTest extends TestCase
     public function testCantBeLoaded()
     {
         $this->expectException(IOException::class);
-        (new FileReader())->readFile(new TextFile(''), new FileSystemHandler());
+        (new FileReader(new TextFile(''), new FileSystemHandler('')))->readFile();
     }
 
     /**
@@ -64,6 +65,6 @@ class FileReaderTest extends TestCase
         chmod($this->notReadable, 0000);
 
         $this->expectException(IOException::class);
-        (new FileReader())->readFile(new TextFile($this->notReadable), new FileSystemHandler());
+        (new FileReader(new TextFile($this->notReadable), new FileSystemHandler($this->notReadable)))->readFile();
     }
 }

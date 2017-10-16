@@ -10,12 +10,33 @@ use LazyEight\DiTesto\Interfaces\WritableFileInterface;
 
 class FileWriter implements FileWriterInterface
 {
-    public function writeFile(FileInterface $file, FileSystemHandlerInterface $fileSystemHandler)
+    /**
+     * @var AbstractFile
+     */
+    private $file;
+
+    /**
+     * @var FileSystemHandlerInterface
+     */
+    private $handler;
+
+    /**
+     * FileWriter constructor.
+     * @param AbstractFile $file
+     * @param FileSystemHandlerInterface $handler
+     */
+    public function __construct(AbstractFile $file, FileSystemHandlerInterface $handler)
     {
-        if (!$fileSystemHandler->isWritable($file->getPath())) {
+        $this->file = $file;
+        $this->handler = $handler;
+    }
+
+    public function writeFile()
+    {
+        if (!$this->handler->isWritable()) {
             throw new IOException("Error, can't write to the file. The file not exists or is not writable.");
         }
 
-        $fileSystemHandler->write($file->getPath(), $file->getRawContent());
+        $this->handler->write($this->file->getRawContent());
     }
 }

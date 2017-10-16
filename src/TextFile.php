@@ -5,7 +5,7 @@ namespace LazyEight\DiTesto;
 use LazyEight\DiTesto\Collections\ArrayObjectLine;
 use LazyEight\DiTesto\Interfaces\TraversableFileInterface;
 
-class TextFile extends File implements TraversableFileInterface
+class TextFile extends AbstractFile implements TraversableFileInterface
 {
     /**
      * @var ArrayObjectLine
@@ -18,17 +18,17 @@ class TextFile extends File implements TraversableFileInterface
     public function __construct($path, $content = '')
     {
         parent::__construct($path, $content);
-        $this->readLines($content);
+        $this->readLines();
     }
 
     /**
      * @param string $content
      */
-    private function readLines(string $content)
+    private function readLines()
     {
         $this->lines = new ArrayObjectLine(array_map(function ($line) {
             return new Line($line);
-        }, explode(PHP_EOL, $content)));
+        }, explode(PHP_EOL, parent::getRawContent())));
     }
 
     public function getRawContent(): string
@@ -39,7 +39,7 @@ class TextFile extends File implements TraversableFileInterface
     public function setRawContent(string $content)
     {
         parent::setRawContent($content);
-        $this->readLines($content);
+        $this->readLines();
     }
 
     /**
@@ -91,5 +91,13 @@ class TextFile extends File implements TraversableFileInterface
     public function count()
     {
         return $this->lines->count();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        return $this->getRawContent();
     }
 }
