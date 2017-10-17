@@ -2,7 +2,7 @@
 
 namespace LazyEight\DiTesto;
 
-use LazyEight\DiTesto\Exceptions\IOException;
+use LazyEight\DiTesto\Exceptions\FileSystemException;
 use LazyEight\DiTesto\Interfaces\FileInterface;
 use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemHandlerInterface;
 use LazyEight\DiTesto\Interfaces\FileWriterInterface;
@@ -33,10 +33,6 @@ class FileWriter implements FileWriterInterface
 
     public function writeFile()
     {
-        if (!$this->handler->isWritable()) {
-            throw new IOException("Error, can't write to the file. The file not exists or is not writable.");
-        }
-
         $this->handler->write($this->file->getRawContent());
     }
 }

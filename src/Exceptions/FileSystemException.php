@@ -2,7 +2,7 @@
 
 namespace LazyEight\DiTesto\Exceptions;
 
-class IOException extends \Exception
+class FileSystemException extends \Exception
 {
 
 }

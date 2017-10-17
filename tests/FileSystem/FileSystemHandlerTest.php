@@ -49,144 +49,156 @@ class FileSystemHandlerTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::__construct
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::exists
      * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
      */
-    public function testExists()
+    public function testCanCreate()
     {
-        $this->assertTrue((new FileSystemHandler($this->file))->exists());
+        $instance = new FileSystemHandler($this->file);
+        $this->assertInstanceOf(FileSystemHandler::class, $instance);
+
+        return $instance;
     }
+
+//    /**
+//     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::__construct
+//     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::exists
+//     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
+//     */
+//    public function testExists()
+//    {
+////        $this->assertTrue((new FileSystemHandler($this->file))->exists());
+//    }
 
     /**
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::__construct
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::exists
      * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
      */
-    public function testNotExists()
-    {
-        $this->assertFalse((new FileSystemHandler($this->notExistsFile))->exists());
-    }
+//    public function testNotExists()
+//    {
+////        $this->assertFalse((new FileSystemHandler($this->notExistsFile))->exists());
+//    }
 
     /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isReadable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::readable
      * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
      */
     public function testReadable()
     {
-        $this->assertTrue((new FileSystemHandler($this->file))->isReadable());
+        $this->assertTrue((new FileSystemHandler($this->file))->readable());
     }
 
     /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isReadable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::readable
      * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
      */
     public function testNotReadable()
     {
-        $this->assertFalse((new FileSystemHandler($this->notReadable))->isReadable());
+        $this->assertFalse((new FileSystemHandler($this->notReadable))->readable());
     }
 
     /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isWritable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::writable
      * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
      */
     public function testWritable()
     {
-        $this->assertTrue((new FileSystemHandler($this->file))->isWritable());
-        $this->assertTrue((new FileSystemHandler($this->path))->isWritable());
+        $this->assertTrue((new FileSystemHandler($this->file))->writable());
+        $this->assertTrue((new FileSystemHandler($this->path))->writable());
     }
 
     /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isWritable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::writable
      * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
      */
     public function testNotWritable()
     {
-        $this->assertFalse((new FileSystemHandler($this->notReadable))->isWritable());
+        $this->assertFalse((new FileSystemHandler($this->notReadable))->writable());
     }
 
-    /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::pathName
-     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
-     */
-    public function testGetPathName()
-    {
-        $this->assertEquals($this->path, (new FileSystemHandler($this->file))->pathName());
-        $this->assertEquals($this->path, (new FileSystemHandler($this->imageFile))->pathName());
-        $this->assertEquals($this->path, (new FileSystemHandler($this->notReadable))->pathName());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::pathName
-     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
-     */
-    public function testCantGetPathName()
-    {
-        $this->assertNotEquals('', (new FileSystemHandler($this->file))->pathName());
-        $this->assertNotEquals($this->file, (new FileSystemHandler($this->file))->pathName());
-        $this->assertNotEquals($this->imageFile, (new FileSystemHandler($this->file))->pathName());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::filename
-     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
-     */
-    public function testGetFileName()
-    {
-        $this->assertEquals($this->files[0], (new FileSystemHandler($this->file))->filename());
-        $this->assertEquals($this->files[1], (new FileSystemHandler($this->imageFile))->filename());
-        $this->assertEquals($this->files[2], (new FileSystemHandler($this->notReadable))->filename());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::filename
-     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
-     */
-    public function testCantGetFileName()
-    {
-        $this->assertNotEquals($this->file, (new FileSystemHandler($this->file))->filename());
-        $this->assertNotEquals('', (new FileSystemHandler($this->file))->filename());
-        $this->assertNotEquals($this->file, (new FileSystemHandler($this->imageFile))->filename());
-        $this->assertNotEquals('', (new FileSystemHandler($this->imageFile))->filename());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::size
-     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
-     */
-    public function testGetSize()
-    {
-        $this->assertEquals($this->sizes[0], (new FileSystemHandler($this->file))->size());
-        $this->assertEquals($this->sizes[1], (new FileSystemHandler($this->imageFile))->size());
-        $this->assertEquals($this->sizes[2], (new FileSystemHandler($this->notReadable))->size());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::filename
-     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
-     */
-    public function testCantGetSize()
-    {
-        $this->assertNotEquals($this->sizes[1], (new FileSystemHandler($this->file))->size());
-        $this->assertNotEquals($this->sizes[0], (new FileSystemHandler($this->imageFile))->size());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::type
-     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
-     */
-    public function testGetType()
-    {
-        $this->assertEquals($this->types[0], (new FileSystemHandler($this->file))->type());
-        $this->assertEquals($this->types[1], (new FileSystemHandler($this->imageFile))->type());
-    }
-
-    /**
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::filename
-     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
-     */
-    public function testCantGetType()
-    {
-        $this->assertNotEquals($this->types[1], (new FileSystemHandler($this->file))->type());
-        $this->assertNotEquals($this->types[0], (new FileSystemHandler($this->imageFile))->type());
-    }
+//    /**
+//     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::pathName
+//     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
+//     */
+//    public function testGetPathName()
+//    {
+////        $this->assertEquals($this->path, (new FileSystemHandler($this->file))->pathName());
+////        $this->assertEquals($this->path, (new FileSystemHandler($this->imageFile))->pathName());
+////        $this->assertEquals($this->path, (new FileSystemHandler($this->notReadable))->pathName());
+//    }
+//
+//    /**
+//     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::pathName
+//     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
+//     */
+//    public function testCantGetPathName()
+//    {
+////        $this->assertNotEquals('', (new FileSystemHandler($this->file))->pathName());
+////        $this->assertNotEquals($this->file, (new FileSystemHandler($this->file))->pathName());
+////        $this->assertNotEquals($this->imageFile, (new FileSystemHandler($this->file))->pathName());
+//    }
+//
+//    /**
+//     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::filename
+//     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
+//     */
+//    public function testGetFileName()
+//    {
+////        $this->assertEquals($this->files[0], (new FileSystemHandler($this->file))->filename());
+////        $this->assertEquals($this->files[1], (new FileSystemHandler($this->imageFile))->filename());
+////        $this->assertEquals($this->files[2], (new FileSystemHandler($this->notReadable))->filename());
+//    }
+//
+//    /**
+//     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::filename
+//     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
+//     */
+//    public function testCantGetFileName()
+//    {
+////        $this->assertNotEquals($this->file, (new FileSystemHandler($this->file))->filename());
+////        $this->assertNotEquals('', (new FileSystemHandler($this->file))->filename());
+////        $this->assertNotEquals($this->file, (new FileSystemHandler($this->imageFile))->filename());
+////        $this->assertNotEquals('', (new FileSystemHandler($this->imageFile))->filename());
+//    }
+//
+//    /**
+//     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::size
+//     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
+//     */
+//    public function testGetSize()
+//    {
+////        $this->assertEquals($this->sizes[0], (new FileSystemHandler($this->file))->size());
+////        $this->assertEquals($this->sizes[1], (new FileSystemHandler($this->imageFile))->size());
+////        $this->assertEquals($this->sizes[2], (new FileSystemHandler($this->notReadable))->size());
+//    }
+//
+//    /**
+//     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::filename
+//     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
+//     */
+//    public function testCantGetSize()
+//    {
+////        $this->assertNotEquals($this->sizes[1], (new FileSystemHandler($this->file))->size());
+////        $this->assertNotEquals($this->sizes[0], (new FileSystemHandler($this->imageFile))->size());
+//    }
+//
+//    /**
+//     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::type
+//     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
+//     */
+//    public function testGetType()
+//    {
+////        $this->assertEquals($this->types[0], (new FileSystemHandler($this->file))->type());
+////        $this->assertEquals($this->types[1], (new FileSystemHandler($this->imageFile))->type());
+//    }
+//
+//    /**
+//     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::filename
+//     * @uses \LazyEight\DiTesto\FileSystem\FileSystemHandler
+//     */
+//    public function testCantGetType()
+//    {
+////        $this->assertNotEquals($this->types[1], (new FileSystemHandler($this->file))->type());
+////        $this->assertNotEquals($this->types[0], (new FileSystemHandler($this->imageFile))->type());
+//    }
 }

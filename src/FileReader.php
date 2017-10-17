@@ -2,7 +2,7 @@
 
 namespace LazyEight\DiTesto;
 
-use LazyEight\DiTesto\Exceptions\IOException;
+use LazyEight\DiTesto\Exceptions\FileSystemException;
 use LazyEight\DiTesto\Interfaces\FileReaderInterface;
 use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemHandlerInterface;
 
@@ -34,10 +34,6 @@ class FileReader implements FileReaderInterface
      */
     public function readFile()
     {
-        if (!$this->handler->isReadable()) {
-            throw new IOException("Error, can't read the file. The file not exist or is not readable.");
-        }
-
         $this->file->setRawContent($this->handler->read());
     }
 }

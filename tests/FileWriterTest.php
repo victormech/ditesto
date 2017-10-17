@@ -2,7 +2,7 @@
 
 namespace Test\DiTesto;
 
-use LazyEight\DiTesto\Exceptions\IOException;
+use LazyEight\DiTesto\Exceptions\FileSystemException;
 use LazyEight\DiTesto\FileSystem\FileSystemHandler;
 use LazyEight\DiTesto\Line;
 use LazyEight\DiTesto\TextFile;
@@ -34,25 +34,24 @@ class FileWriterTest extends TestCase
     /**
      * @covers \LazyEight\DiTesto\FileWriter::__construct
      * @covers \LazyEight\DiTesto\FileWriter::writeFile
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::exists
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isWritable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::getPath
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::writable
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::write
      * @uses \LazyEight\DiTesto\FileWriter
      */
-    public function testWriteFile()
+    public function testWriteNewFile()
     {
         $newFilename = $this->path . '/' . $this->newFilename;
-        $textFile = new TextFile($newFilename);
-        $textFile[] = new Line($this->testLine);
+        $textFile = new TextFile($newFilename, $this->testLine);
+        $handler = new FileSystemHandler($newFilename);
 
-        (new FileWriter($textFile, new FileSystemHandler($textFile->getPath())))->writeFile();
-        $this->assertTrue((new FileSystemHandler($textFile->getPath()))->exists());
+        (new FileWriter($textFile, $handler))->writeFile();
+        $this->assertTrue($handler->getPath()->exists());
     }
 
     /**
      * @covers \LazyEight\DiTesto\FileWriter::writeFile
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::exists
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isWritable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::writable
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::write
      * @uses \LazyEight\DiTesto\FileWriter
      * @expectException IOException
@@ -64,11 +63,11 @@ class FileWriterTest extends TestCase
         chmod($path, 0555);
 
         $newFilename = $path . '/' . $this->newFilename;
-        $textFile = new TextFile($newFilename);
-        $textFile[] = new Line($this->testLine);
+        $textFile = new TextFile($newFilename, $this->testLine);
+        $handler = new FileSystemHandler($newFilename);
 
-        $this->expectException(IOException::class);
-        (new FileWriter($textFile, new FileSystemHandler($textFile->getPath())))->writeFile();
+        $this->expectException(FileSystemException::class);
+        (new FileWriter($textFile, $handler))->writeFile();
     }
 
     /**

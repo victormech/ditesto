@@ -2,7 +2,7 @@
 
 namespace Test\DiTesto;
 
-use LazyEight\DiTesto\Exceptions\IOException;
+use LazyEight\DiTesto\Exceptions\FileSystemException;
 use LazyEight\DiTesto\Line;
 use LazyEight\DiTesto\TextFile;
 use PHPUnit\Framework\TestCase;

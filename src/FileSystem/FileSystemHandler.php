@@ -3,13 +3,26 @@
 namespace LazyEight\DiTesto\FileSystem;
 
 use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemHandlerInterface;
+use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemPathInterface;
+use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemReaderInterface;
+use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemWriterInterface;
 
 class FileSystemHandler implements FileSystemHandlerInterface
 {
     /**
-     * @var string
+     * @var FileSystemPathInterface
      */
     private $path;
+
+    /**
+     * @var FileSystemReaderInterface
+     */
+    private $fileReader;
+
+    /**
+     * @var FileSystemWriterInterface
+     */
+    private $fileWriter;
 
     /**
      * FileSystemHandler constructor.
@@ -17,67 +30,33 @@ class FileSystemHandler implements FileSystemHandlerInterface
      */
     public function __construct(string $path)
     {
-        $this->path = $path;
+        $this->path = new FileSystemPath($path);
+        $this->fileReader = new FileSystemReader($this->path);
+        $this->fileWriter = new FileSystemWriter($this->path);
+    }
+
+    /**
+     * @return FileSystemPath
+     */
+    public function getPath(): FileSystemPathInterface
+    {
+        return clone $this->path;
     }
 
     /**
      * @inheritDoc
      */
-    public function exists(): bool
+    public function readable(): bool
     {
-        return file_exists($this->path);
+        return $this->fileReader->isReadable();
     }
 
     /**
      * @inheritDoc
      */
-    public function isReadable(): bool
+    public function writable(): bool
     {
-        return is_readable($this->path);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function isWritable(): bool
-    {
-        if (!$this->exists() && is_writable($this->pathName())) {
-            return true;
-        }
-
-        return is_writable($this->path);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function pathName(): string
-    {
-        return dirname($this->path);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function filename(): string
-    {
-        return basename($this->path);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function size(): int
-    {
-        return filesize($this->path);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function type(): string
-    {
-        return mime_content_type($this->path);
+        return $this->fileWriter->isWritable();
     }
 
     /**
@@ -85,7 +64,7 @@ class FileSystemHandler implements FileSystemHandlerInterface
      */
     public function read(): string
     {
-        return file_get_contents($this->path);
+        return $this->fileReader->read();
     }
 
     /**
@@ -93,6 +72,6 @@ class FileSystemHandler implements FileSystemHandlerInterface
      */
     public function write(string $content)
     {
-        file_put_contents($this->path, $content);
+        $this->fileWriter->write($content);
     }
 }
