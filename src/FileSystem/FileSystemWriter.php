@@ -2,10 +2,10 @@
 
 namespace LazyEight\DiTesto\FileSystem;
 
-use LazyEight\DiTesto\Exceptions\FileSystemException;
 use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemPathInterface;
 use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemWriterInterface;
-use Test\DiTesto\FileSystem\Exceptions\InvalidPathException;
+use LazyEight\DiTesto\FileSystem\Exceptions\FileSystemException;
+use LazyEight\DiTesto\FileSystem\Exceptions\InvalidPathException;
 
 class FileSystemWriter implements FileSystemWriterInterface
 {
@@ -44,7 +44,7 @@ class FileSystemWriter implements FileSystemWriterInterface
      * @throws FileSystemException
      * @throws InvalidPathException
      */
-    public function validate()
+    private function validate()
     {
         if ($this->path->isDirectory()) {
             throw new InvalidPathException("Error, can't write file content to a directory.");

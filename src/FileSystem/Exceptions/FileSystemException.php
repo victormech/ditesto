@@ -1,6 +1,6 @@
 <?php
 
-namespace LazyEight\DiTesto\Exceptions;
+namespace LazyEight\DiTesto\FileSystem\Exceptions;
 
 class FileSystemException extends \Exception
 {

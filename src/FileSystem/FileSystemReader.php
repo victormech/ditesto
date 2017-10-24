@@ -2,10 +2,10 @@
 
 namespace LazyEight\DiTesto\FileSystem;
 
-use LazyEight\DiTesto\Exceptions\FileSystemException;
+use LazyEight\DiTesto\FileSystem\Exceptions\FileSystemException;
 use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemPathInterface;
 use LazyEight\DiTesto\Interfaces\FileSystem\FileSystemReaderInterface;
-use Test\DiTesto\FileSystem\Exceptions\InvalidPathException;
+use LazyEight\DiTesto\FileSystem\Exceptions\InvalidPathException;
 
 class FileSystemReader implements FileSystemReaderInterface
 {
@@ -37,6 +37,7 @@ class FileSystemReader implements FileSystemReaderInterface
     public function read(): string
     {
         $this->validate();
+
         return file_get_contents($this->path->rawPath());
     }
 
@@ -44,7 +45,7 @@ class FileSystemReader implements FileSystemReaderInterface
      * @throws FileSystemException
      * @throws InvalidPathException
      */
-    public function validate()
+    private function validate()
     {
         if ($this->path->isDirectory()) {
             throw new InvalidPathException("Error, can't read content from a directory.");

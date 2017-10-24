@@ -2,7 +2,7 @@
 
 namespace Test\DiTesto;
 
-use LazyEight\DiTesto\Exceptions\FileSystemException;
+use LazyEight\DiTesto\FileSystem\Exceptions\FileSystemException;
 use LazyEight\DiTesto\FileSystem\FileSystemHandler;
 use LazyEight\DiTesto\TextFile;
 use LazyEight\DiTesto\FileReader;
@@ -47,7 +47,7 @@ class FileReaderTest extends TestCase
      * @covers \LazyEight\DiTesto\FileReader::readFile
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::readable
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::read
-     * @expectedException \LazyEight\DiTesto\Exceptions\FileSystemException
+     * @expectedException \LazyEight\DiTesto\FileSystem\Exceptions\FileSystemException
      * @uses \LazyEight\DiTesto\FileReader
      */
     public function testCantBeLoaded()
@@ -58,7 +58,7 @@ class FileReaderTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\FileReader::readFile
-     * @expectedException \LazyEight\DiTesto\Exceptions\FileSystemException
+     * @expectedException \LazyEight\DiTesto\FileSystem\Exceptions\FileSystemException
      */
     public function testCantRead()
     {

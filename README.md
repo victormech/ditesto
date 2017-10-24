@@ -7,14 +7,17 @@ PHP minimum version: 7
 ## Usage
 ```php
 $file = '/home/user/text-file.txt';
+$fileSystem = new FileSystemHandler();
 $textFile = new TextFile($file); 
-(new FileReader())->readFile($textFile, new FileSystemHandler());
+
+(new FileReader($textFile, $fileSystem))->readFile();
 echo $textFile; // prints all file content
 ```
 You can iterate line per line if you want:
 ```php
 $textFile = new TextFile($file); 
-(new FileReader())->readFile($textFile, new FileSystemHandler()));
+(new FileReader($textFile, new FileSystemHandler()))->readFile());
+
 foreach ($textFile as $line) {
    echo $line;
 }
@@ -26,9 +29,9 @@ $textFile[0] = new Line('Changing an existent line');
 echo count($textFile); // prints total of lines
 echo $textFile[1]; // prints only the second line 
 ```
-To persist your changes:
+To persist the file changes:
 ```php
-(new FileWriter())->writeFile($textFile, new FileSystemHandler());
+(new FileWriter($textFile, new FileSystemHandler()))->writeFile();
 ```
 ## License
   
