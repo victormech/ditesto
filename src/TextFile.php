@@ -28,11 +28,17 @@ class TextFile extends AbstractFile implements TraversableFileInterface
         }, explode(PHP_EOL, parent::getRawContent())));
     }
 
+    /**
+     * @return string
+     */
     public function getRawContent(): string
     {
         return $this->lines->getRawContent();
     }
 
+    /**
+     * @param string $content
+     */
     public function setRawContent(string $content)
     {
         parent::setRawContent($content);

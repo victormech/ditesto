@@ -16,6 +16,11 @@ abstract class AbstractFile implements PrintableContentInterface
      */
     private $rawContent;
 
+    /**
+     * AbstractFile constructor.
+     * @param string $path
+     * @param string $content
+     */
     public function __construct(string $path, string $content = '')
     {
         $this->path = $path;
