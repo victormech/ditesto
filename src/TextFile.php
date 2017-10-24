@@ -21,9 +21,6 @@ class TextFile extends AbstractFile implements TraversableFileInterface
         $this->readLines();
     }
 
-    /**
-     * @param string $content
-     */
     private function readLines()
     {
         $this->lines = new ArrayObjectLine(array_map(function ($line) {
