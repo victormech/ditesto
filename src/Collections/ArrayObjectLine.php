@@ -2,9 +2,7 @@
 
 namespace LazyEight\DiTesto\Collections;
 
-use LazyEight\DiTesto\Interfaces\TextFile\TextFileContentInterface;
-
-class ArrayObjectLine extends \ArrayObject implements TextFileContentInterface
+class ArrayObjectLine extends \ArrayObject
 {
     /**
      * @inheritDoc

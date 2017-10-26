@@ -2,7 +2,7 @@
 
 namespace Test\DiTesto;
 
-use LazyEight\DiTesto\Exceptions\IOException;
+use LazyEight\DiTesto\Exceptions\FileSystemException;
 use LazyEight\DiTesto\Line;
 use LazyEight\DiTesto\TextFile;
 use PHPUnit\Framework\TestCase;
@@ -60,7 +60,7 @@ class TextFileTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\TextFile::getRawContent
-     * @uses \LazyEight\DiTesto\File
+     * @uses \LazyEight\DiTesto\AbstractFile
      * @depends testCanBeCreatedWithContent
      * @param TextFile $file
      */
@@ -72,7 +72,7 @@ class TextFileTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\TextFile::getRawContent
-     * @uses \LazyEight\DiTesto\File
+     * @uses \LazyEight\DiTesto\AbstractFile
      * @depends testCanBeCreatedWithContent
      * @param TextFile $file
      */
@@ -178,6 +178,17 @@ class TextFileTest extends TestCase
     {
         $textFile->offsetUnset(0);
         $this->assertEquals(3, $textFile->count());
+    }
+
+    /**
+     * @covers \LazyEight\DiTesto\TextFile::__toString
+     * @uses \LazyEight\DiTesto\TextFile
+     * @depends testCanBeCreated
+     */
+    public function testToString(TextFile $textFile)
+    {
+        $textFile->setRawContent(file_get_contents($this->file));
+        $this->assertEquals(file_get_contents($this->file), $textFile->__toString());
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Test\DiTesto;
 
-use LazyEight\DiTesto\Exceptions\IOException;
+use LazyEight\DiTesto\FileSystem\Exceptions\FileSystemException;
 use LazyEight\DiTesto\FileSystem\FileSystemHandler;
 use LazyEight\DiTesto\TextFile;
 use LazyEight\DiTesto\FileReader;
@@ -26,8 +26,9 @@ class FileReaderTest extends TestCase
     protected $notReadable = './tests/files/urls_not_readable.txt';
 
     /**
+     * @covers \LazyEight\DiTesto\FileReader::__construct
      * @covers \LazyEight\DiTesto\FileReader::readFile
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isReadable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::readable
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::read
      * @uses \LazyEight\DiTesto\FileReader
      * @uses \LazyEight\DiTesto\FileReader
@@ -36,7 +37,7 @@ class FileReaderTest extends TestCase
     public function testCanRead()
     {
         $textFile = new TextFile($this->file);
-        (new FileReader())->readFile($textFile, new FileSystemHandler());
+        (new FileReader($textFile, new FileSystemHandler($textFile->getPath())))->readFile();
 
         $arrFile = explode(PHP_EOL, file_get_contents($this->file));
         $this->assertTrue(count($arrFile) === count($textFile));
@@ -44,26 +45,26 @@ class FileReaderTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\FileReader::readFile
-     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::isReadable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::readable
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemHandler::read
-     * @expectedException \LazyEight\DiTesto\Exceptions\IOException
+     * @expectedException \LazyEight\DiTesto\FileSystem\Exceptions\FileSystemException
      * @uses \LazyEight\DiTesto\FileReader
      */
     public function testCantBeLoaded()
     {
-        $this->expectException(IOException::class);
-        (new FileReader())->readFile(new TextFile(''), new FileSystemHandler());
+        $this->expectException(\Throwable::class);
+        (new FileReader(new TextFile(''), new FileSystemHandler('')))->readFile();
     }
 
     /**
      * @covers \LazyEight\DiTesto\FileReader::readFile
-     * @expectedException \LazyEight\DiTesto\Exceptions\IOException
+     * @expectedException \LazyEight\DiTesto\FileSystem\Exceptions\FileSystemException
      */
     public function testCantRead()
     {
         chmod($this->notReadable, 0000);
 
-        $this->expectException(IOException::class);
-        (new FileReader())->readFile(new TextFile($this->notReadable), new FileSystemHandler());
+        $this->expectException(FileSystemException::class);
+        (new FileReader(new TextFile($this->notReadable), new FileSystemHandler($this->notReadable)))->readFile();
     }
 }
