@@ -7,7 +7,7 @@ PHP minimum version: 7
 ## Usage
 ```php
 $file = '/home/user/text-file.txt';
-$fileSystem = new FileSystemHandler();
+$fileSystem = new FileSystemHandler($file);
 $textFile = new TextFile($file); 
 
 (new FileReader($textFile, $fileSystem))->readFile();
@@ -16,7 +16,8 @@ echo $textFile; // prints all file content
 You can iterate line per line if you want:
 ```php
 $textFile = new TextFile($file); 
-(new FileReader($textFile, new FileSystemHandler()))->readFile());
+$fileSystem = new FileSystemHandler($file);
+(new FileReader($textFile, $fileSystem))->readFile());
 
 foreach ($textFile as $line) {
    echo $line;
@@ -31,7 +32,9 @@ echo $textFile[1]; // prints only the second line
 ```
 To persist the file changes:
 ```php
-(new FileWriter($textFile, new FileSystemHandler()))->writeFile();
+$textFile = new TextFile($file); 
+$fileSystem = new FileSystemHandler($file);
+(new FileWriter($textFile, $fileSystem))->writeFile();
 ```
 ## License
   
