@@ -76,6 +76,7 @@ class FileSystemWriterTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validate
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validateIsDirectory
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::isWritablePath
      * @expectedException \LazyEight\DiTesto\FileSystem\Exceptions\FileSystemException
      */
@@ -93,6 +94,7 @@ class FileSystemWriterTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validate
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validateIsDirectory
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::isWritablePath
      * @expectedException \LazyEight\DiTesto\FileSystem\Exceptions\InvalidPathException
      */
@@ -106,6 +108,7 @@ class FileSystemWriterTest extends TestCase
 
     /**
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validate
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validateIsDirectory
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::isWritablePath
      * @expectedException \LazyEight\DiTesto\FileSystem\Exceptions\InvalidPathException
      */
