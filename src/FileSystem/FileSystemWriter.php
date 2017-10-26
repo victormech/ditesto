@@ -55,14 +55,8 @@ class FileSystemWriter implements FileSystemWriterInterface
     private function validate()
     {
         $this->validateIsDirectory();
-
-        if (!file_exists($this->path->rawPath()) && !$this->isWritablePath()) {
-            throw new FileSystemException("Error, can't write to the file. The path must be writable.");
-        }
-
-        if (file_exists($this->path->rawPath()) && !$this->isWritable()) {
-            throw new FileSystemException("Error, can't write to the file. The file must be writable.");
-        }
+        $this->validatePathIsWritable();
+        $this->validateWritableFile();
     }
 
     /**
@@ -72,6 +66,26 @@ class FileSystemWriter implements FileSystemWriterInterface
     {
         if ($this->path->isDirectory()) {
             throw new InvalidPathException("Error, can't write file content to a directory.");
+        }
+    }
+
+    /**
+     * @throws FileSystemException
+     */
+    private function validatePathIsWritable()
+    {
+        if (!file_exists($this->path->rawPath()) && !$this->isWritablePath()) {
+            throw new FileSystemException("Error, can't write to the file. The path must be writable.");
+        }
+    }
+
+    /**
+     * @throws FileSystemException
+     */
+    private function validateWritableFile()
+    {
+        if (file_exists($this->path->rawPath()) && !$this->isWritable()) {
+            throw new FileSystemException("Error, can't write to the file. The file must be writable.");
         }
     }
 }

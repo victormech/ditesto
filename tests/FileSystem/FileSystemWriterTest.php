@@ -47,6 +47,7 @@ class FileSystemWriterTest extends TestCase
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::__construct
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::write
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validate
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validateWritableFile
      * @uses \LazyEight\DiTesto\FileWriter
      */
     public function testWriteNewFile()
@@ -78,6 +79,8 @@ class FileSystemWriterTest extends TestCase
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validate
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validateIsDirectory
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::isWritablePath
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validatePathIsWritable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validateWritableFile
      * @expectedException \LazyEight\DiTesto\FileSystem\Exceptions\FileSystemException
      */
     public function testCantWrite()
@@ -96,6 +99,8 @@ class FileSystemWriterTest extends TestCase
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validate
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validateIsDirectory
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::isWritablePath
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validatePathIsWritable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validateWritableFile
      * @expectedException \LazyEight\DiTesto\FileSystem\Exceptions\InvalidPathException
      */
     public function testCantWriteDirectory()
@@ -109,6 +114,8 @@ class FileSystemWriterTest extends TestCase
     /**
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validate
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validateIsDirectory
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validatePathIsWritable
+     * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::validateWritableFile
      * @covers \LazyEight\DiTesto\FileSystem\FileSystemWriter::isWritablePath
      * @expectedException \LazyEight\DiTesto\FileSystem\Exceptions\InvalidPathException
      */
